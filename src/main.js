@@ -29,6 +29,7 @@ function getDiscountPercent(price, originalPrice) {
 const COMP_SVGS = {
   home: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1v-9.5z"/></svg>`,
   store: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.8-5h14.4L21 9"/><path d="M3 9c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3"/><path d="M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8"/></svg>`,
+  cube: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
   gear: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.08a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.08a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
   cart: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 4h2.8l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.8a1.5 1.5 0 0 0 1.5-1.1L21 7H6.2"/></svg>`,
   badgeCheck: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.3 2.3 4.8-4.8"/></svg>`,
@@ -130,12 +131,12 @@ app.innerHTML = `
           <button
             type="button"
             id="btn-open-desk-builder"
-            class="rail-nav-btn desk-builder-btn"
+            class="rail-nav-btn"
             aria-label="تكوين مساحة العمل 3D"
             aria-haspopup="dialog"
           >
             <span>تكوين مكتب</span>
-            <span class="rail-nav-icon">🎮</span>
+            <span class="rail-nav-icon">${COMP_SVGS.cube}</span>
           </button>
         </li>
         <li>
@@ -172,20 +173,6 @@ app.innerHTML = `
     <figure class="r-enso-mark region plate" data-region="enso-mark">
       <img src="/assets/plates/enso-mark.png" alt="شعار حلقة إنسو الحبرية" />
     </figure>
-
-    <!-- 10. sidebar-featured-photo (Plate) -->
-    <figure class="r-sidebar-featured-photo region plate" data-region="sidebar-featured-photo">
-      <img src="/assets/products/brass-organizer.jpg" alt="منظم المكتب النحاسي" />
-    </figure>
-
-    <!-- 11. sidebar-featured-meta -->
-    <div class="r-sidebar-featured-meta region control" data-region="sidebar-featured-meta">
-      <p class="featured-meta-title">منظم المكتب النحاسي</p>
-      <p class="featured-meta-sub">ستاند مكتبي من النحاس المصمت</p>
-      <button type="button" class="featured-meta-btn" data-spotlight-add="5">
-        استكشف
-      </button>
-    </div>
 
     <!-- 12 & 13. card-1-photo & card-1-meta -->
     <figure class="r-card-1-photo region plate" data-region="card-1-photo">
