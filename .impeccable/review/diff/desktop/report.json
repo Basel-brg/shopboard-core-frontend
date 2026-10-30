@@ -1,0 +1,752 @@
+{
+  "tool": "comp-diff",
+  "version": 1,
+  "createdAt": "2026-10-29T19:28:17.338Z",
+  "label": "desktop",
+  "comp": ".impeccable/mocks/comp-1.png",
+  "build": ".impeccable/review/desktop.png",
+  "spec": ".impeccable/build/spec.json",
+  "compSize": "1376x768",
+  "buildSize": "1440x2100",
+  "align": "top",
+  "overall": 0.8043,
+  "verdict": "match",
+  "scores": {
+    "overall": 0.8043,
+    "structure": 0.7726,
+    "color": 0.8016,
+    "colorIntersection": 0.7009,
+    "paletteMatch": 0.8558,
+    "detail": 0.8181,
+    "detailRaw": 0.8337,
+    "detailAdded": 0.0313,
+    "bands": 0.86
+  },
+  "palette": {
+    "comp": [
+      {
+        "hex": "#f2eada",
+        "coverage": 0.7362
+      },
+      {
+        "hex": "#12100f",
+        "coverage": 0.0821
+      },
+      {
+        "hex": "#b88555",
+        "coverage": 0.0603
+      },
+      {
+        "hex": "#dcba8e",
+        "coverage": 0.046
+      },
+      {
+        "hex": "#c3b5a2",
+        "coverage": 0.0407
+      },
+      {
+        "hex": "#e3a95c",
+        "coverage": 0.0346
+      }
+    ],
+    "build": [
+      {
+        "hex": "#f2e7d7",
+        "coverage": 0.7077
+      },
+      {
+        "hex": "#d9c3a2",
+        "coverage": 0.0877
+      },
+      {
+        "hex": "#aa9885",
+        "coverage": 0.0754
+      },
+      {
+        "hex": "#26201a",
+        "coverage": 0.0616
+      },
+      {
+        "hex": "#b38156",
+        "coverage": 0.0374
+      },
+      {
+        "hex": "#605a52",
+        "coverage": 0.0302
+      }
+    ]
+  },
+  "regions": [
+    {
+      "id": "hero-desk-photo",
+      "x": 0,
+      "y": 0,
+      "w": 0.5,
+      "h": 0.6,
+      "kind": "image",
+      "score": {
+        "overall": 0.7708,
+        "structure": 0.8033,
+        "color": 0.5783,
+        "colorIntersection": 0.6031,
+        "paletteMatch": 0.565,
+        "detail": 0.8486,
+        "detailRaw": 0.8486,
+        "detailAdded": 0,
+        "bands": 0.6
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 688,
+          "h": 461
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 688,
+          "h": 461
+        }
+      }
+    },
+    {
+      "id": "hero-headline",
+      "x": 0.5218,
+      "y": 0.1784,
+      "w": 0.2747,
+      "h": 0.1224,
+      "kind": "text",
+      "score": {
+        "overall": 0.5684,
+        "structure": 0.4884,
+        "color": 0.7835,
+        "colorIntersection": 0.6199,
+        "paletteMatch": 0.8715,
+        "detail": 0.4007,
+        "detailRaw": 0.4996,
+        "detailAdded": 0.1979,
+        "bands": 0.6824
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 9,
+          "y": 6,
+          "w": 359,
+          "h": 88
+        },
+        "build": {
+          "x": 2,
+          "y": 3,
+          "w": 374,
+          "h": 75
+        }
+      }
+    },
+    {
+      "id": "hero-subhead",
+      "x": 0.5262,
+      "y": 0.3255,
+      "w": 0.2703,
+      "h": 0.0755,
+      "kind": "text",
+      "score": {
+        "overall": 0.6742,
+        "structure": 0.6589,
+        "color": 0.8247,
+        "colorIntersection": 0.6839,
+        "paletteMatch": 0.9005,
+        "detail": 0.3716,
+        "detailRaw": 0.481,
+        "detailAdded": 0.2188,
+        "bands": 0.8286
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 11,
+          "y": 8,
+          "w": 351,
+          "h": 44
+        },
+        "build": {
+          "x": 1,
+          "y": 6,
+          "w": 357,
+          "h": 44
+        }
+      }
+    },
+    {
+      "id": "hero-cta-primary",
+      "x": 0.5262,
+      "y": 0.3229,
+      "w": 0.1737,
+      "h": 0.0768,
+      "kind": "control",
+      "score": {
+        "overall": 0.6686,
+        "structure": 0.6375,
+        "color": 0.8527,
+        "colorIntersection": 0.7264,
+        "paletteMatch": 0.9208,
+        "detail": 0.4164,
+        "detailRaw": 0.531,
+        "detailAdded": 0.2292,
+        "bands": 0.75
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 239,
+          "h": 59
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 239,
+          "h": 59
+        }
+      }
+    },
+    {
+      "id": "hero-cta-secondary",
+      "x": 0.6999,
+      "y": 0.3229,
+      "w": 0.0959,
+      "h": 0.0768,
+      "kind": "control",
+      "score": {
+        "overall": 0.6433,
+        "structure": 0.5859,
+        "color": 0.7742,
+        "colorIntersection": 0.5859,
+        "paletteMatch": 0.8757,
+        "detail": 0.5431,
+        "detailRaw": 0.6108,
+        "detailAdded": 0.1354,
+        "bands": 0.9111
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 10,
+          "w": 124,
+          "h": 43
+        },
+        "build": {
+          "x": 0,
+          "y": 11,
+          "w": 119,
+          "h": 40
+        }
+      }
+    },
+    {
+      "id": "hero-badges",
+      "x": 0.548,
+      "y": 0.4466,
+      "w": 0.0654,
+      "h": 0.1172,
+      "kind": "text",
+      "score": {
+        "overall": 0.6668,
+        "structure": 0.6726,
+        "color": 0.7943,
+        "colorIntersection": 0.6316,
+        "paletteMatch": 0.8819,
+        "detail": 0.4071,
+        "detailRaw": 0.4383,
+        "detailAdded": 0.0625,
+        "bands": 0.7086
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 10,
+          "y": 9,
+          "w": 71,
+          "h": 70
+        },
+        "build": {
+          "x": 20,
+          "y": 18,
+          "w": 64,
+          "h": 54
+        }
+      }
+    },
+    {
+      "id": "sidebar-brand",
+      "x": 0.8438,
+      "y": 0.0469,
+      "w": 0.1439,
+      "h": 0.0781,
+      "kind": "text",
+      "score": {
+        "overall": 0.5663,
+        "structure": 0.4301,
+        "color": 0.8054,
+        "colorIntersection": 0.7017,
+        "paletteMatch": 0.8613,
+        "detail": 0.4545,
+        "detailRaw": 0.5014,
+        "detailAdded": 0.0938,
+        "bands": 0.8167
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 8,
+          "y": 9,
+          "w": 179,
+          "h": 45
+        },
+        "build": {
+          "x": 25,
+          "y": 10,
+          "w": 173,
+          "h": 41
+        }
+      }
+    },
+    {
+      "id": "sidebar-nav",
+      "x": 0.8917,
+      "y": 0.3333,
+      "w": 0.0916,
+      "h": 0.0469,
+      "kind": "control",
+      "score": {
+        "overall": 0.6935,
+        "structure": 0.7077,
+        "color": 0.9319,
+        "colorIntersection": 0.8829,
+        "paletteMatch": 0.9583,
+        "detail": 0.2443,
+        "detailRaw": 0.3224,
+        "detailAdded": 0.1563,
+        "bands": 0.32
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 6,
+          "y": 13,
+          "w": 109,
+          "h": 24
+        },
+        "build": {
+          "x": 28,
+          "y": 20,
+          "w": 91,
+          "h": 21
+        }
+      }
+    },
+    {
+      "id": "enso-mark",
+      "x": 0.8,
+      "y": 0.4,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "plate",
+      "score": {
+        "overall": 0.6596,
+        "structure": 0.8137,
+        "color": 0.9118,
+        "colorIntersection": 0.8503,
+        "paletteMatch": 0.9449,
+        "detail": 0.4626,
+        "detailRaw": 0.5095,
+        "detailAdded": 0.0938,
+        "bands": 0.85
+      },
+      "verdict": "missing",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 240,
+          "h": 231
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 243,
+          "h": 231
+        }
+      }
+    },
+    {
+      "id": "sidebar-featured-photo",
+      "x": 0.8,
+      "y": 0.6,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "image",
+      "score": {
+        "overall": 0.7773,
+        "structure": 0.811,
+        "color": 0.7319,
+        "colorIntersection": 0.5711,
+        "paletteMatch": 0.8185,
+        "detail": 0.7563,
+        "detailRaw": 0.7615,
+        "detailAdded": 0.0104,
+        "bands": 1
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 230,
+          "h": 230
+        },
+        "build": {
+          "x": 81,
+          "y": 0,
+          "w": 153,
+          "h": 230
+        }
+      }
+    },
+    {
+      "id": "sidebar-featured-meta",
+      "x": 0.8568,
+      "y": 0.7995,
+      "w": 0.1177,
+      "h": 0.1094,
+      "kind": "control",
+      "score": {
+        "overall": 0.6054,
+        "structure": 0.5006,
+        "color": 0.7337,
+        "colorIntersection": 0.5276,
+        "paletteMatch": 0.8446,
+        "detail": 0.617,
+        "detailRaw": 0.6378,
+        "detailAdded": 0.0417,
+        "bands": 0.8167
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 6,
+          "y": 0,
+          "w": 146,
+          "h": 79
+        },
+        "build": {
+          "x": 3,
+          "y": 0,
+          "w": 153,
+          "h": 81
+        }
+      }
+    },
+    {
+      "id": "card-1-photo",
+      "x": 0,
+      "y": 0.6,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "image",
+      "score": {
+        "overall": 0.637,
+        "structure": 0.5368,
+        "color": 0.7801,
+        "colorIntersection": 0.6219,
+        "paletteMatch": 0.8653,
+        "detail": 0.6042,
+        "detailRaw": 0.7449,
+        "detailAdded": 0.2813,
+        "bands": 0.8933
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 275,
+          "h": 230
+        },
+        "build": {
+          "x": 26,
+          "y": 67,
+          "w": 239,
+          "h": 160
+        }
+      }
+    },
+    {
+      "id": "card-1-meta",
+      "x": 0.048,
+      "y": 0.8385,
+      "w": 0.1519,
+      "h": 0.1094,
+      "kind": "control",
+      "score": {
+        "overall": 0.6694,
+        "structure": 0.6164,
+        "color": 0.8399,
+        "colorIntersection": 0.6857,
+        "paletteMatch": 0.9229,
+        "detail": 0.4903,
+        "detailRaw": 0.558,
+        "detailAdded": 0.1354,
+        "bands": 0.765
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 9,
+          "w": 209,
+          "h": 75
+        },
+        "build": {
+          "x": 1,
+          "y": 12,
+          "w": 198,
+          "h": 70
+        }
+      }
+    },
+    {
+      "id": "card-2-photo",
+      "x": 0.2,
+      "y": 0.6,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "image",
+      "score": {
+        "overall": 0.6841,
+        "structure": 0.7972,
+        "color": 0.6394,
+        "colorIntersection": 0.3355,
+        "paletteMatch": 0.803,
+        "detail": 0.6294,
+        "detailRaw": 0.6398,
+        "detailAdded": 0.0208,
+        "bands": 0.8444
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 275,
+          "h": 230
+        },
+        "build": {
+          "x": 90,
+          "y": 55,
+          "w": 162,
+          "h": 172
+        }
+      }
+    },
+    {
+      "id": "card-2-meta",
+      "x": 0.2871,
+      "y": 0.7995,
+      "w": 0.061,
+      "h": 0.0313,
+      "kind": "control",
+      "score": {
+        "overall": 0.6894,
+        "structure": 0.7993,
+        "color": 0.6897,
+        "colorIntersection": 0.4643,
+        "paletteMatch": 0.8111,
+        "detail": 0.4416,
+        "detailRaw": 0.4833,
+        "detailAdded": 0.0833,
+        "bands": 0.8667
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 2,
+          "y": 0,
+          "w": 80,
+          "h": 26
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 78,
+          "h": 28
+        }
+      }
+    },
+    {
+      "id": "card-3-photo",
+      "x": 0.4,
+      "y": 0.6,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "image",
+      "score": {
+        "overall": 0.6506,
+        "structure": 0.7137,
+        "color": 0.6435,
+        "colorIntersection": 0.2878,
+        "paletteMatch": 0.835,
+        "detail": 0.5926,
+        "detailRaw": 0.6499,
+        "detailAdded": 0.1146,
+        "bands": 0.9429
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 276,
+          "h": 230
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 276,
+          "h": 227
+        }
+      }
+    },
+    {
+      "id": "card-3-meta",
+      "x": 0.452,
+      "y": 0.8385,
+      "w": 0.1395,
+      "h": 0.1094,
+      "kind": "control",
+      "score": {
+        "overall": 0.6349,
+        "structure": 0.5752,
+        "color": 0.8226,
+        "colorIntersection": 0.6386,
+        "paletteMatch": 0.9216,
+        "detail": 0.4411,
+        "detailRaw": 0.5504,
+        "detailAdded": 0.2188,
+        "bands": 0.7667
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 10,
+          "w": 187,
+          "h": 73
+        },
+        "build": {
+          "x": 3,
+          "y": 12,
+          "w": 179,
+          "h": 70
+        }
+      }
+    },
+    {
+      "id": "card-4-photo",
+      "x": 0.6,
+      "y": 0.6,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "image",
+      "score": {
+        "overall": 0.6273,
+        "structure": 0.6275,
+        "color": 0.6467,
+        "colorIntersection": 0.4143,
+        "paletteMatch": 0.7719,
+        "detail": 0.5964,
+        "detailRaw": 0.6746,
+        "detailAdded": 0.1563,
+        "bands": 0.8571
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 3,
+          "w": 275,
+          "h": 227
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 275,
+          "h": 230
+        }
+      }
+    },
+    {
+      "id": "card-4-meta",
+      "x": 0.6526,
+      "y": 0.8385,
+      "w": 0.1308,
+      "h": 0.1094,
+      "kind": "control",
+      "score": {
+        "overall": 0.6418,
+        "structure": 0.6102,
+        "color": 0.7577,
+        "colorIntersection": 0.5341,
+        "paletteMatch": 0.8781,
+        "detail": 0.5103,
+        "detailRaw": 0.5832,
+        "detailAdded": 0.1458,
+        "bands": 0.78
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 9,
+          "w": 173,
+          "h": 74
+        },
+        "build": {
+          "x": 2,
+          "y": 12,
+          "w": 169,
+          "h": 70
+        }
+      }
+    }
+  ],
+  "files": {
+    "sideBySide": "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/side-by-side.png",
+    "heatmap": "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/heatmap.png",
+    "regionFiles": [
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/hero-desk-photo.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/hero-headline.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/hero-subhead.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/hero-cta-primary.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/hero-cta-secondary.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/hero-badges.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/sidebar-brand.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/sidebar-nav.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/enso-mark.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/sidebar-featured-photo.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/sidebar-featured-meta.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-1-photo.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-1-meta.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-2-photo.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-2-meta.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-3-photo.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-3-meta.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-4-photo.png",
+      "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/regions/card-4-meta.png"
+    ]
+  }
+}

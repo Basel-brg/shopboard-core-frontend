@@ -1,9 +1,20 @@
-# AGENTS.md
+# ShopBoard
 
 Single source of truth for any AI agent working on this project.
 Read this file first. If you learn something durable about the project
 (architecture decisions, conventions, gotchas, TODOs), write it back here —
 not into `CLAUDE.md`, not into chat-only notes.
+
+## Stack
+Vite (vanilla), HTML, CSS
+
+## Rules
+1. Semantic HTML first
+2. Every input has a label
+3. Mobile-first, min-width
+4. No !important
+5. Explain every change
+6. Validate all inputs (always validate inputs wherever they are created: format, constraints, live feedback, and accessibility)
 
 ## Project
 
@@ -29,14 +40,14 @@ command here.
 
 | Path | Role |
 |---|---|
-| `index.html` | Real entry point — Vite serves it directly. Holds `<div id="app">` and loads `/src/main.js`. |
-| `src/main.js` | App entry: imports CSS, renders markup into `#app`, wires up modules. |
-| `src/counter.js` | Leftover scaffold demo module (`setupCounter`). Safe to delete once real code lands. |
-| `src/style.css` | All styles: CSS custom properties on `:root`, a `prefers-color-scheme: dark` block, nested CSS, one breakpoint at 1024px. |
-| `src/assets/` | Assets that must be `import`ed from JS so Vite fingerprints and rewrites their URLs. |
-| `public/` | Files copied verbatim to the web root; reference them by absolute path (`/favicon.svg`, `/icons.svg`). Never `import` from here. |
-
-Still the Vite starter page as of the last update to this file.
+| `index.html` | Real entry point — RTL Arabic setup (`lang="ar" dir="rtl"`), Google Fonts (`IBM Plex Sans Arabic`, `Readex Pro`), loads `/src/main.js`. |
+| `src/main.js` | App entry: renders semantic store shell, catalog, quick-view modal, cart drawer, coupon form, and auth dialog. |
+| `src/products.js` | Product catalog data with SKUs, specs, warranty, studio tone classes, and SVG artwork keys. |
+| `src/icons.js` | Custom SVG UI icons and studio vector product illustrations. |
+| `src/cart.js` | Cart state manager (`localStorage`), free shipping progress calculation, and promo coupon engine (`SHOP20`, `WELCOME10`). |
+| `src/auth.js` | User authentication & registration state manager (`localStorage`). |
+| `src/validation.js` | Reusable live & submit validation rules and accessible error rendering for all inputs. |
+| `src/style.css` | Editorial design system (Warm Stone & Deep Emerald palette + dark mode), mobile-first with `min-width` breakpoints (`640px`, `768px`, `1024px`) and zero `!important`. |
 
 ## Conventions
 
@@ -53,9 +64,12 @@ Still the Vite starter page as of the last update to this file.
 ## State of play
 
 - [x] Vite vanilla scaffold, dependencies installed, first commit
-- [ ] Replace the starter page with the real shopboard UI
-- [ ] Decide what shopboard actually does (no product spec captured yet — ask the owner)
-- [ ] Remove `src/counter.js` and the scaffold assets once unused
+- [x] Replace the starter page with the real shopboard UI (E-commerce store with catalog, search, categories, cart drawer, checkout modal)
+- [x] Authentication & Login / Registration dialog with state management (`src/auth.js`)
+- [x] Full input validation system with live inline Arabic error feedback & accessibility attributes (`src/validation.js`)
+- [x] Remove `src/counter.js` scaffold demo
+- [x] Mobile-first CSS with min-width media queries and no !important
+- [x] Semantic HTML and explicit labels for all inputs
 
 ## Notes for the next agent
 

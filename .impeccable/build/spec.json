@@ -1,0 +1,1186 @@
+{
+  "tool": "comp-spec",
+  "version": 1,
+  "createdAt": "2026-10-29T13:06:38.737Z",
+  "comp": ".impeccable/mocks/comp-1.png",
+  "warnings": [
+    "region hero-desk-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region enso-mark: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region sidebar-featured-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region card-1-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region card-2-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region card-3-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region card-4-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)"
+  ],
+  "uncoveredInkCells": [],
+  "compSize": {
+    "width": 1376,
+    "height": 768
+  },
+  "aspect": 1.7917,
+  "orientation": "landscape",
+  "palette": [
+    {
+      "hex": "#f2eada",
+      "coverage": 0.7626
+    },
+    {
+      "hex": "#12100f",
+      "coverage": 0.0851
+    },
+    {
+      "hex": "#b88555",
+      "coverage": 0.0625
+    },
+    {
+      "hex": "#dcba8e",
+      "coverage": 0.0477
+    },
+    {
+      "hex": "#c3b5a2",
+      "coverage": 0.0421
+    }
+  ],
+  "bands": [
+    {
+      "y": 0.2113,
+      "strength": 0.2346
+    },
+    {
+      "y": 0.2394,
+      "strength": 0.3779
+    },
+    {
+      "y": 0.338,
+      "strength": 0.3795
+    },
+    {
+      "y": 0.3944,
+      "strength": 0.3876
+    },
+    {
+      "y": 0.6056,
+      "strength": 0.658
+    },
+    {
+      "y": 0.8732,
+      "strength": 0.5421
+    },
+    {
+      "y": 0.9014,
+      "strength": 0.3923
+    }
+  ],
+  "regions": [
+    {
+      "id": "hero-desk-photo",
+      "kind": "image",
+      "note": "warm oak desk setup studio photograph with mechanical keyboard, headphones on wooden stand, and glowing Akari lantern",
+      "grid": "A0:E5",
+      "bleed": true,
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0.5,
+        "h": 0.6
+      },
+      "px": {
+        "x": 0,
+        "y": 0,
+        "w": 688,
+        "h": 461
+      },
+      "aspect": 1.4924,
+      "palette": [
+        {
+          "hex": "#bb8858",
+          "coverage": 0.2718
+        },
+        {
+          "hex": "#0b0908",
+          "coverage": 0.2409
+        },
+        {
+          "hex": "#ecddc3",
+          "coverage": 0.2072
+        },
+        {
+          "hex": "#e2a858",
+          "coverage": 0.1405
+        },
+        {
+          "hex": "#e4c390",
+          "coverage": 0.1396
+        }
+      ],
+      "detail": {
+        "energy": 18.4727
+      },
+      "medium": "raster",
+      "plate": "assets/plates/hero-desk-photo.png",
+      "text": null
+    },
+    {
+      "id": "hero-headline",
+      "kind": "text",
+      "note": "main Arabic display headline",
+      "grid": "F1:H2",
+      "coverBox": {
+        "x": 0.5,
+        "y": 0.1,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.5218,
+        "y": 0.1784,
+        "w": 0.2747,
+        "h": 0.1224
+      },
+      "px": {
+        "x": 718,
+        "y": 137,
+        "w": 378,
+        "h": 94
+      },
+      "aspect": 4.0213,
+      "palette": [
+        {
+          "hex": "#f7ecdc",
+          "coverage": 0.8179
+        },
+        {
+          "hex": "#252521",
+          "coverage": 0.1321
+        },
+        {
+          "hex": "#706f68",
+          "coverage": 0.0231
+        },
+        {
+          "hex": "#9c9b90",
+          "coverage": 0.0156
+        },
+        {
+          "hex": "#c3c1b7",
+          "coverage": 0.0113
+        }
+      ],
+      "detail": {
+        "energy": 55.3469
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 6,
+          "capHeightPx": 38.8,
+          "inkIsDark": true,
+          "allCaps": true,
+          "advance": 1.0825,
+          "advTall": 1.8428,
+          "advX": null,
+          "gap": 0.1675,
+          "xRatio": null,
+          "stemW": 0.1733,
+          "contrast": 0.9676,
+          "serif": null,
+          "densTall": 0.4008,
+          "densX": null,
+          "weight": 0.4008
+        },
+        "widthClass": "wide",
+        "weightClass": "regular",
+        "chosen": {
+          "family": "Tsukimi Rounded",
+          "weight": 700,
+          "fontSizePx": 57,
+          "source": "index",
+          "fp": {
+            "lines": 1,
+            "glyphs": 7,
+            "capHeightPx": 38.6,
+            "inkIsDark": true,
+            "allCaps": true,
+            "advance": 1.1407,
+            "advTall": 1.737,
+            "advX": null,
+            "gap": 0.2593,
+            "xRatio": null,
+            "stemW": 0.1565,
+            "contrast": 0.6973,
+            "serif": null,
+            "densTall": 0.3875,
+            "densX": null,
+            "weight": 0.3875
+          },
+          "stamp": "313a95270eba"
+        }
+      }
+    },
+    {
+      "id": "hero-subhead",
+      "kind": "text",
+      "note": "supporting Arabic subheadline under main title",
+      "grid": "F2:H3",
+      "coverBox": {
+        "x": 0.5,
+        "y": 0.2,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.5262,
+        "y": 0.3255,
+        "w": 0.2703,
+        "h": 0.0755
+      },
+      "px": {
+        "x": 724,
+        "y": 250,
+        "w": 372,
+        "h": 58
+      },
+      "aspect": 6.4138,
+      "palette": [
+        {
+          "hex": "#f7eddc",
+          "coverage": 0.5842
+        },
+        {
+          "hex": "#262625",
+          "coverage": 0.3371
+        },
+        {
+          "hex": "#bbb3a4",
+          "coverage": 0.0568
+        },
+        {
+          "hex": "#61635b",
+          "coverage": 0.0114
+        },
+        {
+          "hex": "#8a8a87",
+          "coverage": 0.0105
+        }
+      ],
+      "detail": {
+        "energy": 42.4016
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 4,
+          "capHeightPx": 42.4,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 4.7425,
+          "advTall": 4.7425,
+          "advX": null,
+          "gap": 0.1416,
+          "xRatio": 0.4042,
+          "stemW": 0.0441,
+          "contrast": 0.9201,
+          "serif": null,
+          "densTall": 0.8938,
+          "densX": null,
+          "weight": 0.8938
+        },
+        "widthClass": "wide",
+        "weightClass": "black",
+        "chosen": {
+          "family": "Doto",
+          "weight": 400,
+          "fontSizePx": 75,
+          "source": "index",
+          "fp": {
+            "lines": 1,
+            "glyphs": 5,
+            "capHeightPx": 42.5,
+            "inkIsDark": true,
+            "allCaps": true,
+            "advance": 1.9293,
+            "advTall": null,
+            "advX": null,
+            "gap": 0,
+            "xRatio": null,
+            "stemW": 0.104,
+            "contrast": 0.8616,
+            "serif": null,
+            "densTall": null,
+            "densX": null,
+            "weight": null
+          },
+          "stamp": "a51b61af9b6b"
+        }
+      }
+    },
+    {
+      "id": "hero-cta-primary",
+      "kind": "control",
+      "note": "dark charcoal primary action pill button",
+      "grid": "F3:G3",
+      "coverBox": {
+        "x": 0.5,
+        "y": 0.3,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.5262,
+        "y": 0.3229,
+        "w": 0.1737,
+        "h": 0.0768
+      },
+      "px": {
+        "x": 724,
+        "y": 248,
+        "w": 239,
+        "h": 59
+      },
+      "aspect": 4.0508,
+      "palette": [
+        {
+          "hex": "#272726",
+          "coverage": 0.5127
+        },
+        {
+          "hex": "#f8eedf",
+          "coverage": 0.4574
+        },
+        {
+          "hex": "#5b5b57",
+          "coverage": 0.014
+        },
+        {
+          "hex": "#858582",
+          "coverage": 0.0095
+        },
+        {
+          "hex": "#323d2d",
+          "coverage": 0.0064
+        }
+      ],
+      "detail": {
+        "energy": 32.5748
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "hero-cta-secondary",
+      "kind": "control",
+      "note": "outlined secondary action pill button",
+      "grid": "H3:H3",
+      "coverBox": {
+        "x": 0.7,
+        "y": 0.3,
+        "w": 0.1,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.6999,
+        "y": 0.3229,
+        "w": 0.0959,
+        "h": 0.0768
+      },
+      "px": {
+        "x": 963,
+        "y": 248,
+        "w": 132,
+        "h": 59
+      },
+      "aspect": 2.2373,
+      "palette": [
+        {
+          "hex": "#f7ecd9",
+          "coverage": 0.9329
+        },
+        {
+          "hex": "#c0b39a",
+          "coverage": 0.0243
+        },
+        {
+          "hex": "#080808",
+          "coverage": 0.022
+        },
+        {
+          "hex": "#28281c",
+          "coverage": 0.0104
+        },
+        {
+          "hex": "#86837c",
+          "coverage": 0.0104
+        }
+      ],
+      "detail": {
+        "energy": 18.9536
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "hero-badges",
+      "kind": "text",
+      "note": "three horizontal feature badges with captions",
+      "grid": "F4:H5",
+      "coverBox": {
+        "x": 0.5,
+        "y": 0.4,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.548,
+        "y": 0.4466,
+        "w": 0.0654,
+        "h": 0.1172
+      },
+      "px": {
+        "x": 754,
+        "y": 343,
+        "w": 90,
+        "h": 90
+      },
+      "aspect": 1,
+      "palette": [
+        {
+          "hex": "#f7eddc",
+          "coverage": 0.8943
+        },
+        {
+          "hex": "#828075",
+          "coverage": 0.0337
+        },
+        {
+          "hex": "#49483e",
+          "coverage": 0.0315
+        },
+        {
+          "hex": "#bcb8af",
+          "coverage": 0.0247
+        },
+        {
+          "hex": "#0f0f0f",
+          "coverage": 0.0157
+        }
+      ],
+      "detail": {
+        "energy": 17.1733
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 2,
+          "glyphs": 10,
+          "capHeightPx": 10.7,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.1917,
+          "advTall": 0.1917,
+          "advX": null,
+          "gap": 0.1394,
+          "xRatio": 0.5464,
+          "stemW": 0.1683,
+          "contrast": 0.9229,
+          "serif": 1.0643,
+          "densTall": 0.8877,
+          "densX": null,
+          "weight": 0.8877
+        },
+        "widthClass": "compressed",
+        "weightClass": "black"
+      }
+    },
+    {
+      "id": "sidebar-brand",
+      "kind": "text",
+      "note": "ShopBoard brand title and vermilion seal mark",
+      "grid": "I0:J1",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.8438,
+        "y": 0.0469,
+        "w": 0.1439,
+        "h": 0.0781
+      },
+      "px": {
+        "x": 1161,
+        "y": 36,
+        "w": 198,
+        "h": 60
+      },
+      "aspect": 3.3,
+      "palette": [
+        {
+          "hex": "#e9e8d9",
+          "coverage": 0.7762
+        },
+        {
+          "hex": "#aa3522",
+          "coverage": 0.0834
+        },
+        {
+          "hex": "#212016",
+          "coverage": 0.076
+        },
+        {
+          "hex": "#efb2a4",
+          "coverage": 0.0413
+        },
+        {
+          "hex": "#ed8674",
+          "coverage": 0.0231
+        }
+      ],
+      "detail": {
+        "energy": 41.1369
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 6,
+          "capHeightPx": 42,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 1.0226,
+          "advTall": 1.0226,
+          "advX": null,
+          "gap": 0.0713,
+          "xRatio": 0.8336,
+          "stemW": 0.0762,
+          "contrast": 1.1516,
+          "serif": null,
+          "densTall": 0.3023,
+          "densX": null,
+          "weight": 0.3023
+        },
+        "widthClass": "wide",
+        "weightClass": "light"
+      }
+    },
+    {
+      "id": "sidebar-nav",
+      "kind": "control",
+      "note": "vertical sidebar navigation links",
+      "grid": "I2:J4",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0.2,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "box": {
+        "x": 0.8917,
+        "y": 0.3333,
+        "w": 0.0916,
+        "h": 0.0469
+      },
+      "px": {
+        "x": 1227,
+        "y": 256,
+        "w": 126,
+        "h": 36
+      },
+      "aspect": 3.5,
+      "palette": [
+        {
+          "hex": "#e9e8d9",
+          "coverage": 0.8828
+        },
+        {
+          "hex": "#12100c",
+          "coverage": 0.0364
+        },
+        {
+          "hex": "#bfbcb2",
+          "coverage": 0.0303
+        },
+        {
+          "hex": "#898781",
+          "coverage": 0.0263
+        },
+        {
+          "hex": "#343428",
+          "coverage": 0.0242
+        }
+      ],
+      "detail": {
+        "energy": 27.7412
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "enso-mark",
+      "kind": "plate",
+      "note": "circular black ink Enso brush stroke emblem",
+      "grid": "I4:J6",
+      "bleed": true,
+      "box": {
+        "x": 0.8,
+        "y": 0.4,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 1101,
+        "y": 307,
+        "w": 275,
+        "h": 230
+      },
+      "aspect": 1.1957,
+      "palette": [
+        {
+          "hex": "#eae9d8",
+          "coverage": 0.9185
+        },
+        {
+          "hex": "#252522",
+          "coverage": 0.028
+        },
+        {
+          "hex": "#d5bb91",
+          "coverage": 0.0269
+        },
+        {
+          "hex": "#c7bbae",
+          "coverage": 0.0197
+        },
+        {
+          "hex": "#463a26",
+          "coverage": 0.0069
+        }
+      ],
+      "detail": {
+        "energy": 10.5473
+      },
+      "medium": "raster",
+      "plate": "assets/plates/enso-mark.png",
+      "text": null
+    },
+    {
+      "id": "sidebar-featured-photo",
+      "kind": "image",
+      "note": "featured brass desk organizer studio photo",
+      "grid": "I6:J8",
+      "bleed": true,
+      "box": {
+        "x": 0.8,
+        "y": 0.6,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 1101,
+        "y": 461,
+        "w": 275,
+        "h": 230
+      },
+      "aspect": 1.1957,
+      "palette": [
+        {
+          "hex": "#ede9d9",
+          "coverage": 0.7493
+        },
+        {
+          "hex": "#aa7f54",
+          "coverage": 0.0775
+        },
+        {
+          "hex": "#473018",
+          "coverage": 0.0764
+        },
+        {
+          "hex": "#cfb493",
+          "coverage": 0.0522
+        },
+        {
+          "hex": "#a5907b",
+          "coverage": 0.0445
+        }
+      ],
+      "detail": {
+        "energy": 17.0059
+      },
+      "medium": "raster",
+      "plate": "assets/plates/sidebar-featured-photo.png",
+      "text": null
+    },
+    {
+      "id": "sidebar-featured-meta",
+      "kind": "control",
+      "note": "featured item title and action button",
+      "grid": "I8:J9",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0.8,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.8568,
+        "y": 0.7995,
+        "w": 0.1177,
+        "h": 0.1094
+      },
+      "px": {
+        "x": 1179,
+        "y": 614,
+        "w": 162,
+        "h": 84
+      },
+      "aspect": 1.9286,
+      "palette": [
+        {
+          "hex": "#f3eadb",
+          "coverage": 0.648
+        },
+        {
+          "hex": "#b08154",
+          "coverage": 0.22
+        },
+        {
+          "hex": "#362f24",
+          "coverage": 0.0515
+        },
+        {
+          "hex": "#75543e",
+          "coverage": 0.0425
+        },
+        {
+          "hex": "#100d0c",
+          "coverage": 0.038
+        }
+      ],
+      "detail": {
+        "energy": 28.9478
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "card-1-photo",
+      "kind": "image",
+      "note": "wireless mechanical keyboard product photo",
+      "grid": "A6:B8",
+      "bleed": true,
+      "box": {
+        "x": 0,
+        "y": 0.6,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 0,
+        "y": 461,
+        "w": 275,
+        "h": 230
+      },
+      "aspect": 1.1957,
+      "palette": [
+        {
+          "hex": "#f1ebdb",
+          "coverage": 0.8092
+        },
+        {
+          "hex": "#c0b4a6",
+          "coverage": 0.0766
+        },
+        {
+          "hex": "#d6be96",
+          "coverage": 0.0443
+        },
+        {
+          "hex": "#847d70",
+          "coverage": 0.039
+        },
+        {
+          "hex": "#524839",
+          "coverage": 0.0309
+        }
+      ],
+      "detail": {
+        "energy": 27.0261
+      },
+      "medium": "raster",
+      "plate": "assets/plates/card-1-photo.png",
+      "text": null
+    },
+    {
+      "id": "card-1-meta",
+      "kind": "control",
+      "note": "first product title, subtitle, SAR price, and add button",
+      "grid": "A8:B9",
+      "coverBox": {
+        "x": 0,
+        "y": 0.8,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.048,
+        "y": 0.8385,
+        "w": 0.1519,
+        "h": 0.1094
+      },
+      "px": {
+        "x": 66,
+        "y": 644,
+        "w": 209,
+        "h": 84
+      },
+      "aspect": 2.4881,
+      "palette": [
+        {
+          "hex": "#f5e9db",
+          "coverage": 0.8898
+        },
+        {
+          "hex": "#494840",
+          "coverage": 0.0338
+        },
+        {
+          "hex": "#b2b0a8",
+          "coverage": 0.0291
+        },
+        {
+          "hex": "#7a786f",
+          "coverage": 0.027
+        },
+        {
+          "hex": "#252317",
+          "coverage": 0.0203
+        }
+      ],
+      "detail": {
+        "energy": 36.9962
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "card-2-photo",
+      "kind": "image",
+      "note": "matte black studio ANC headphones product photo",
+      "grid": "C6:D8",
+      "bleed": true,
+      "box": {
+        "x": 0.2,
+        "y": 0.6,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 275,
+        "y": 461,
+        "w": 275,
+        "h": 230
+      },
+      "aspect": 1.1957,
+      "palette": [
+        {
+          "hex": "#f0ebdb",
+          "coverage": 0.8605
+        },
+        {
+          "hex": "#383735",
+          "coverage": 0.0531
+        },
+        {
+          "hex": "#dbc098",
+          "coverage": 0.0327
+        },
+        {
+          "hex": "#1c1810",
+          "coverage": 0.0294
+        },
+        {
+          "hex": "#63635f",
+          "coverage": 0.0243
+        }
+      ],
+      "detail": {
+        "energy": 22.6801
+      },
+      "medium": "raster",
+      "plate": "assets/plates/card-2-photo.png",
+      "text": null
+    },
+    {
+      "id": "card-2-meta",
+      "kind": "control",
+      "note": "second product title, subtitle, SAR price, and add button",
+      "grid": "C8:D9",
+      "coverBox": {
+        "x": 0.2,
+        "y": 0.8,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.2871,
+        "y": 0.7995,
+        "w": 0.061,
+        "h": 0.0313
+      },
+      "px": {
+        "x": 395,
+        "y": 614,
+        "w": 84,
+        "h": 24
+      },
+      "aspect": 3.5,
+      "palette": [
+        {
+          "hex": "#e8e7d8",
+          "coverage": 0.6384
+        },
+        {
+          "hex": "#2b2b29",
+          "coverage": 0.3437
+        },
+        {
+          "hex": "#a0a098",
+          "coverage": 0.0089
+        },
+        {
+          "hex": "#585858",
+          "coverage": 0.0045
+        },
+        {
+          "hex": "#787868",
+          "coverage": 0.0045
+        }
+      ],
+      "detail": {
+        "energy": 8.3189
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "card-3-photo",
+      "kind": "image",
+      "note": "brass desk lamp product photo",
+      "grid": "E6:F8",
+      "bleed": true,
+      "box": {
+        "x": 0.4,
+        "y": 0.6,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 550,
+        "y": 461,
+        "w": 275,
+        "h": 230
+      },
+      "aspect": 1.1957,
+      "palette": [
+        {
+          "hex": "#f0eada",
+          "coverage": 0.931
+        },
+        {
+          "hex": "#d4ba94",
+          "coverage": 0.0431
+        },
+        {
+          "hex": "#79725f",
+          "coverage": 0.0112
+        },
+        {
+          "hex": "#b9b5a7",
+          "coverage": 0.0077
+        },
+        {
+          "hex": "#a7987e",
+          "coverage": 0.0071
+        }
+      ],
+      "detail": {
+        "energy": 16.3979
+      },
+      "medium": "raster",
+      "plate": "assets/plates/card-3-photo.png",
+      "text": null
+    },
+    {
+      "id": "card-3-meta",
+      "kind": "control",
+      "note": "third product title, subtitle, SAR price, and add button",
+      "grid": "E8:F9",
+      "coverBox": {
+        "x": 0.4,
+        "y": 0.8,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.452,
+        "y": 0.8385,
+        "w": 0.1395,
+        "h": 0.1094
+      },
+      "px": {
+        "x": 622,
+        "y": 644,
+        "w": 192,
+        "h": 84
+      },
+      "aspect": 2.2857,
+      "palette": [
+        {
+          "hex": "#f6eadc",
+          "coverage": 0.8888
+        },
+        {
+          "hex": "#706e64",
+          "coverage": 0.0384
+        },
+        {
+          "hex": "#b2b1a4",
+          "coverage": 0.0271
+        },
+        {
+          "hex": "#13100d",
+          "coverage": 0.0254
+        },
+        {
+          "hex": "#333328",
+          "coverage": 0.0203
+        }
+      ],
+      "detail": {
+        "energy": 30.7149
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "card-4-photo",
+      "kind": "image",
+      "note": "ergonomic vertical mouse product photo",
+      "grid": "G6:H8",
+      "bleed": true,
+      "box": {
+        "x": 0.6,
+        "y": 0.6,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 826,
+        "y": 461,
+        "w": 275,
+        "h": 230
+      },
+      "aspect": 1.1957,
+      "palette": [
+        {
+          "hex": "#f0ebdb",
+          "coverage": 0.8525
+        },
+        {
+          "hex": "#4c4c4b",
+          "coverage": 0.0495
+        },
+        {
+          "hex": "#d1b690",
+          "coverage": 0.0352
+        },
+        {
+          "hex": "#242420",
+          "coverage": 0.0315
+        },
+        {
+          "hex": "#c0b5a9",
+          "coverage": 0.0313
+        }
+      ],
+      "detail": {
+        "energy": 16.8269
+      },
+      "medium": "raster",
+      "plate": "assets/plates/card-4-photo.png",
+      "text": null
+    },
+    {
+      "id": "card-4-meta",
+      "kind": "control",
+      "note": "fourth product title, subtitle, SAR price, and add button",
+      "grid": "G8:H9",
+      "coverBox": {
+        "x": 0.6,
+        "y": 0.8,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.6526,
+        "y": 0.8385,
+        "w": 0.1308,
+        "h": 0.1094
+      },
+      "px": {
+        "x": 898,
+        "y": 644,
+        "w": 180,
+        "h": 84
+      },
+      "aspect": 2.1429,
+      "palette": [
+        {
+          "hex": "#f7ebdf",
+          "coverage": 0.8737
+        },
+        {
+          "hex": "#1b1812",
+          "coverage": 0.0473
+        },
+        {
+          "hex": "#515046",
+          "coverage": 0.0455
+        },
+        {
+          "hex": "#c2bdb4",
+          "coverage": 0.0192
+        },
+        {
+          "hex": "#98958b",
+          "coverage": 0.0144
+        }
+      ],
+      "detail": {
+        "energy": 33.1471
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    }
+  ]
+}

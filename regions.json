@@ -1,0 +1,125 @@
+{
+  "regions": [
+    {
+      "id": "hero-desk-photo",
+      "kind": "image",
+      "grid": "A0:E5",
+      "bleed": true,
+      "note": "warm oak desk setup studio photograph with mechanical keyboard, headphones on wooden stand, and glowing Akari lantern"
+    },
+    {
+      "id": "hero-headline",
+      "kind": "text",
+      "grid": "F1:H2",
+      "note": "main Arabic display headline"
+    },
+    {
+      "id": "hero-subhead",
+      "kind": "text",
+      "grid": "F2:H3",
+      "note": "supporting Arabic subheadline under main title"
+    },
+    {
+      "id": "hero-cta-primary",
+      "kind": "control",
+      "grid": "F3:G3",
+      "note": "dark charcoal primary action pill button"
+    },
+    {
+      "id": "hero-cta-secondary",
+      "kind": "control",
+      "grid": "H3:H3",
+      "note": "outlined secondary action pill button"
+    },
+    {
+      "id": "hero-badges",
+      "kind": "text",
+      "grid": "F4:H5",
+      "note": "three horizontal feature badges with captions"
+    },
+    {
+      "id": "sidebar-brand",
+      "kind": "text",
+      "grid": "I0:J1",
+      "note": "ShopBoard brand title and vermilion seal mark"
+    },
+    {
+      "id": "sidebar-nav",
+      "kind": "control",
+      "grid": "I2:J4",
+      "note": "vertical sidebar navigation links"
+    },
+    {
+      "id": "enso-mark",
+      "kind": "plate",
+      "grid": "I4:J6",
+      "bleed": true,
+      "note": "circular black ink Enso brush stroke emblem"
+    },
+    {
+      "id": "sidebar-featured-photo",
+      "kind": "image",
+      "grid": "I6:J8",
+      "bleed": true,
+      "note": "featured brass desk organizer studio photo"
+    },
+    {
+      "id": "sidebar-featured-meta",
+      "kind": "control",
+      "grid": "I8:J9",
+      "note": "featured item title and action button"
+    },
+    {
+      "id": "card-1-photo",
+      "kind": "image",
+      "grid": "A6:B8",
+      "bleed": true,
+      "note": "wireless mechanical keyboard product photo"
+    },
+    {
+      "id": "card-1-meta",
+      "kind": "control",
+      "grid": "A8:B9",
+      "note": "first product title, subtitle, SAR price, and add button"
+    },
+    {
+      "id": "card-2-photo",
+      "kind": "image",
+      "grid": "C6:D8",
+      "bleed": true,
+      "note": "matte black studio ANC headphones product photo"
+    },
+    {
+      "id": "card-2-meta",
+      "kind": "control",
+      "grid": "C8:D9",
+      "note": "second product title, subtitle, SAR price, and add button"
+    },
+    {
+      "id": "card-3-photo",
+      "kind": "image",
+      "grid": "E6:F8",
+      "bleed": true,
+      "note": "brass desk lamp product photo"
+    },
+    {
+      "id": "card-3-meta",
+      "kind": "control",
+      "grid": "E8:F9",
+      "note": "third product title, subtitle, SAR price, and add button"
+    },
+    {
+      "id": "card-4-photo",
+      "kind": "image",
+      "grid": "G6:H8",
+      "bleed": true,
+      "note": "ergonomic vertical mouse product photo"
+    },
+    {
+      "id": "card-4-meta",
+      "kind": "control",
+      "grid": "G8:H9",
+      "note": "fourth product title, subtitle, SAR price, and add button"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "title": "اختر الهوية البصرية لمتجر ShopBoard",
+  "question": "اختارت القرعة نظام (ESD Hardware Datasheet Binder). يمكنك اعتماده، أو اختيار أحد البدائل، أو إعادة الرمي.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "ESD Hardware Datasheet & Lab Binder",
+      "kicker": "THE ROLL",
+      "lineage": "ملفات المواصفات الهندسية وتغليف المختبرات الإلكترونية المضاد للكهرباء الساكنة",
+      "thesis": "كل قطعة مكتبية تُعرض كوحدة عتاد مخبرية مرقّمة بجدول مواصفات فني وختم فحص هندسي.",
+      "palette": [
+        "#0c0e12",
+        "#161920",
+        "#facc15",
+        "#f4f4f6"
+      ],
+      "materials": [
+        "ألمنيوم مؤكسد داكن",
+        "شارات تحذير تقنية صفراء",
+        "شبكة خطوط هندسية دقيقة"
+      ],
+      "viewport": "لوحة مواصفات رئيسية مقسومة تعرض العتاد المميز بقياسات أداء حية وشريط فلاتر تقني مرقّم.",
+      "risk": "قد يبدو صارماً أكثر من اللازم إن لم تبرز الصور الفوتوغرافية للمنتجات بوضوح.",
+      "raised": [
+        {
+          "from": "challenger-exploitation",
+          "raise": "إبراز فرق السعر ونسبة التوفير بأحجام طباعية جريئة وعالية التباين داخل بطاقة العتاد."
+        },
+        {
+          "from": "challenger-blast",
+          "raise": "فواصل هيكلية سميكة تقسم لوحة المواصفات والفلاتر بدقة معمارية حادة."
+        },
+        {
+          "from": "challenger-provenance",
+          "raise": "شريط تتبع متصل يربط كل منتج بكود المصنع (SKU) وحالة الضمان والشحن الفوري."
+        }
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Braun / Rams 1960s Industrial Spec Manual",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "كتالوجات وأدلة تشغيل أجهزة Braun الألمانية في الستينيات",
+      "thesis": "هدوء صناعي فائق الوضوح يضع صورة المنتج والمواصفات الهندسية على ورق تقني دافئ مع لمسة برتقالية معايرة.",
+      "palette": [
+        "#f4f2ed",
+        "#18181b",
+        "#e04f16",
+        "#d6d3cd"
+      ],
+      "materials": [
+        "معدن مطفي رمادي دافئ",
+        "مؤشرات برتقالية معايرة",
+        "جداول بيانات أحادية العرض"
+      ],
+      "viewport": "واجهة هندسية نظيفة تعرض المنتج القياسي مع جدول مواصفات مرقم ومفاتيح تصفية ميكانيكية.",
+      "risk": "اتجاه مألوف ومفضل في متاجر معدات المكتب الاحترافية وقد يكون أقل مفاجأة.",
+      "case": "الأعلى توافقاً مع جمهور المهندسين وعشاق السيت أب المكتبي مع وضوح قراءة فوري."
+    },
+    {
+      "id": "challenger-exposure",
+      "label": "Darkroom Exposure Zone Sheet",
+      "verdict": "competitive",
+      "lineage": "سجلات التعريض الضوئي المتدرجة في الغرف المظلمة",
+      "thesis": "طبقات tonal متدرجة من إحدى عشرة درجة رمادية مع تمييز ضوئي واحد للمنتجات المختارة.",
+      "palette": [
+        "#090a0c",
+        "#272a30",
+        "#e11d74",
+        "#eceef2"
+      ],
+      "materials": [
+        "تدرج مناطق ضوئية",
+        "إضاءة خلفية مركزة"
+      ],
+      "viewport": "ألواح متراكبة تعرض كل قطعة تقنية فوق سلم تدرج ضوئي مع قراءات رقمية دقيقة.",
+      "case": "ينجح في إبراز الدقة الرقمية والقياسات، لكنه أقل ألفة كمتجر شراء مباشر.",
+      "risk": "التراكب المائل للألواح قد يبطئ المقارنة السريعة بين عدة منتجات.",
+      "hero": "https://impeccable.style/worlds/cards/operate-b-exposure-record-zone-sheets-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-b-exposure-record-zone-sheets.webp"
+    },
+    {
+      "id": "challenger-cutting-bench",
+      "label": "Film Cutting Bench & Select Rail",
+      "verdict": "competitive",
+      "lineage": "طاولة مونتاج الأفلام وسكة الإطارات المثقبة",
+      "thesis": "سكة اختيار أفقية مثقبة تعرض المعدات المختارة في نوافذ مضيئة فوق أرضية سوداء بحواف برتقالية.",
+      "palette": [
+        "#080808",
+        "#ff5a1f",
+        "#ffffff",
+        "#262626"
+      ],
+      "materials": [
+        "شريط مثقب",
+        "نوافذ عرض بيضاء ناصعة",
+        "علامات شريط برتقالي"
+      ],
+      "viewport": "سكة عرض رئيسية للمنتج المختار وتحتها شبكة الوحدات المعلقة الجاهزة للإضافة للسلة.",
+      "case": "تباين بصري قوي جداً يناسب عرض العتاد التقني، مع التزام صارم بنوافذ الصور البيضاء.",
+      "risk": "استعارة المونتاج السينمائي تحتاج تطويعاً لتناسب سلة التسوق.",
+      "hero": "https://impeccable.style/worlds/cards/operate-a-cutting-bench-select-rail-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-a-cutting-bench-select-rail.webp"
+    },
+    {
+      "id": "challenger-akari",
+      "label": "Akari Warm Light Workshop",
+      "verdict": "competitive",
+      "lineage": "ورشة مصابيح ورق الواشي اليابانية المضاءة",
+      "thesis": "مساحة مكتب هادئة ودافئة تشع فيها بطاقات المنتجات كأحجام مضاءة من الداخل مع ختم قرمزي للطلب.",
+      "palette": [
+        "#fbf6ec",
+        "#c8a97e",
+        "#1f1d1a",
+        "#c8372d"
+      ],
+      "materials": [
+        "إضاءة ورقية دافئة",
+        "خطوط هيكلية نحيفة",
+        "ختم قرمزي"
+      ],
+      "viewport": "معرض مضاء بهدوء يبرز إضاءة المكتب والمعدات في جو مسائي دافئ ومريح للعين.",
+      "case": "مثالي لجانب الإضاءة المكتبية وبيئة العمل الهادئة، لكنه أقل تقنية للمفاتيح الميكانيكية.",
+      "risk": "النعومة الورقية قد تقلل من الإحساس بالصلابة المعدنية للأجهزة التقنية.",
+      "hero": "https://impeccable.style/worlds/cards/paper-folds-pleats-deployable-akari-light-sculpture-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/paper-folds-pleats-deployable-akari-light-sculpture.webp"
+    },
+    {
+      "id": "challenger-exploitation",
+      "label": "Double-Feature Combo Sheet",
+      "verdict": "declined",
+      "lineage": "ملصقات العروض المزدوجة الصاخبة",
+      "thesis": "عناوين ضخمة متصادمة بزاوية مائلة مع كتلة نصوص سفلية كثيفة.",
+      "palette": [
+        "#0a0a0a",
+        "#facc15",
+        "#dc2626"
+      ],
+      "materials": [
+        "طباعة أوفست عالية التباين",
+        "شارات مائلة"
+      ],
+      "viewport": "عناوين ترويجية صاخبة تتزاحم في الشاشة الأولى.",
+      "risk": "يفقد المتجر الموثوقية الهندسية المطلوبة لمعدات المكتب الاحترافية.",
+      "case": "يتعارض مع الوضوح الهندسي ومقارنة المواصفات الدقيقة.",
+      "kept": "إبراز فرق السعر ونسبة التوفير بأحجام طباعية جريئة وعالية التباين.",
+      "hero": "https://impeccable.style/worlds/cards/posters-covers-sleeves-exploitation-combo-sheet-hero.webp"
+    },
+    {
+      "id": "challenger-blast",
+      "label": "1914 Wood-Type Manifesto",
+      "verdict": "declined",
+      "lineage": "مجلات البيانات الطباعية الخشبية без صور",
+      "thesis": "صفحة طباعية بالكامل بدون أي صور فوتوغرافية، تعتمد على كتل الحروف المائلة.",
+      "palette": [
+        "#d8b4bc",
+        "#111111"
+      ],
+      "materials": [
+        "حروف خشبية ثقيلة",
+        "فواصل سوداء قاطعة"
+      ],
+      "viewport": "كتل نصية عمودية وأفقية متقاطعة بدون صور منتجات.",
+      "risk": "يمنع عرض الصور الفوتوغرافية الحقيقية للمنتجات.",
+      "case": "يتعارض مع التزام المتجر بعرض صور فوتوغرافية حقيقية للمنتجات.",
+      "kept": "فواصل هيكلية سميكة تقسم لوحة المواصفات والفلاتر بدقة معمارية حادة.",
+      "hero": "https://impeccable.style/worlds/cards/design-canon-blast-manifesto-page-hero.webp"
+    },
+    {
+      "id": "challenger-provenance",
+      "label": "Museum Provenance Ribbon",
+      "verdict": "declined",
+      "lineage": "شريط توثيق سلسلة ملكية القطع المتحفية",
+      "thesis": "عمود سردي واحد يتتبع تاريخ انتقال قطعة أثرية عبر الزمن.",
+      "palette": [
+        "#f2eadc",
+        "#b91c1c",
+        "#292524"
+      ],
+      "materials": [
+        "شريط حريري أحمر متصل",
+        "أختام توثيق"
+      ],
+      "viewport": "خط زمني رأسي لتتبع تاريخ قطعة واحدة.",
+      "risk": "لا يدعم تصفح ومقارنة كتالوج منتجات متعدد الأصناف.",
+      "case": "مصمم للسرد التاريخي لقطعة وحيدة وليس لمتجر أجهزة تقنية.",
+      "kept": "شريط تتبع متصل يربط كل منتج بكود المصنع (SKU) وحالة الضمان والشحن الفوري.",
+      "hero": "https://impeccable.style/worlds/cards/exhibition-museum-curation-provenance-ribbon-hero.webp"
+    }
+  ],
+  "reroll": {
+    "registers": [
+      "safer",
+      "bolder"
+    ]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "Standard Pro Tech Store",
+    "thesis": "متجر تقني حديث ونظيف بالتخطيط القياسي المتوقع في المتاجر العالمية.",
+    "palette": [
+      "#ffffff",
+      "#09090b",
+      "#2563eb"
+    ],
+    "materials": [
+      "شبكة بطاقات متناسقة",
+      "صور منتجات على خلفية ناصعة"
+    ],
+    "viewport": "بانر رئيسي واضح يليه شريط فلاتر وشبكة منتجات من 4 أعمدة.",
+    "risk": "مألوف جداً ويشبه المتاجر التقنية التقليدية."
+  },
+  "steer": true
+}

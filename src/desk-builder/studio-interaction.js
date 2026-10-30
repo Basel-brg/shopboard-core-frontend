@@ -129,6 +129,20 @@ export class DeskStudioInteraction {
     this.handlePointerMove(clientX, clientY)
   }
 
+  spawnAtCenter(productId) {
+    const obj = create3DProduct(productId, false)
+    if (!obj) return
+    obj.userData.instanceId = 'inst_' + this.instanceSeq++
+    const jitterX = (Math.random() - 0.5) * 0.4
+    const jitterZ = (Math.random() - 0.5) * 0.3
+    const y = calculateElevation(jitterX, jitterZ, this.getSurfaces())
+    obj.position.set(jitterX, y, jitterZ)
+    this.scene.scene.add(obj)
+    this.placedObjects.push(obj)
+    this.selectObject(obj)
+    this.onSetupChange(this.placedObjects)
+  }
+
   handlePointerMove(clientX, clientY) {
     if (!this.activeDragObj) return
 

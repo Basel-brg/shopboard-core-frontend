@@ -84,6 +84,14 @@ export function initDeskBuilder() {
           studioInteraction.startSpawnDrag(product.id, e.clientX, e.clientY)
         })
 
+        // Keyboard Accessibility (Enter or Space places at center)
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            studioInteraction.spawnAtCenter(product.id)
+          }
+        })
+
         catalogList.appendChild(item)
       })
     }
@@ -114,7 +122,10 @@ export function initDeskBuilder() {
       addToCartBtn.addEventListener('click', () => {
         const placed = studioInteraction.getPlacedObjects()
         if (placed.length === 0) {
-          alert('يرجى سحب وإضافة قطعة واحدة على الأقل إلى المكتب قبل الإضافة للسلة!')
+          addToCartBtn.textContent = '⚠️ يرجى سحب قطعة أولاً'
+          setTimeout(() => {
+            addToCartBtn.textContent = '🛒 إضافة التشكيلة كاملة للسلة'
+          }, 2000)
           return
         }
 

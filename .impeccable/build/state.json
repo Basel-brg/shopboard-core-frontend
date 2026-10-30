@@ -1,0 +1,448 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-10-29T12:55:06.596Z",
+  "comp": ".impeccable/mocks/comp-1.png",
+  "direction": "d3214009",
+  "breakpoint": "1376x768",
+  "artifact": null,
+  "phase": "review",
+  "phases": {
+    "comps": {
+      "status": "closed",
+      "openedAt": "2026-10-29T12:55:06.596Z",
+      "closedAt": "2026-10-29T13:05:39.383Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "3 comps, 1 approved",
+        "approved": ".impeccable/mocks/comp-1.png",
+        "at": "2026-10-29T13:05:39.382Z"
+      },
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-10-29T13:05:39.403Z",
+      "closedAt": "2026-10-29T18:52:57.339Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "19 regions, 7 plates, 4 text regions measured",
+        "at": "2026-10-29T18:52:57.339Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-10-29T18:52:57.339Z",
+      "closedAt": "2026-10-29T19:02:22.755Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "7/7 plates",
+        "at": "2026-10-29T19:02:22.755Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "closed",
+      "openedAt": "2026-10-29T19:02:22.755Z",
+      "closedAt": "2026-10-29T19:26:29.367Z",
+      "attempts": 7,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "hero 82% (match)",
+        "score": 0.8167,
+        "verdict": "match",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/hero/side-by-side.png",
+        "worst": [
+          "hero-headline drift 56%",
+          "sidebar-brand drift 60%",
+          "card-1-photo drift 63%"
+        ],
+        "worstIds": [
+          "hero-headline",
+          "sidebar-brand",
+          "card-1-photo"
+        ],
+        "worstCrops": [
+          {
+            "id": "hero-headline",
+            "verdict": "drift",
+            "score": {
+              "overall": 0.557,
+              "structure": 0.436,
+              "color": 0.7837,
+              "colorIntersection": 0.623,
+              "paletteMatch": 0.8703,
+              "detail": 0.4553,
+              "detailRaw": 0.5543,
+              "detailAdded": 0.1979,
+              "bands": 0.7477
+            },
+            "file": ".impeccable/review/diff/hero/regions/hero-headline.png"
+          },
+          {
+            "id": "sidebar-brand",
+            "verdict": "drift",
+            "score": {
+              "overall": 0.6012,
+              "structure": 0.4619,
+              "color": 0.8266,
+              "colorIntersection": 0.6987,
+              "paletteMatch": 0.8955,
+              "detail": 0.4948,
+              "detailRaw": 0.5469,
+              "detailAdded": 0.1042,
+              "bands": 0.8933
+            },
+            "file": ".impeccable/review/diff/hero/regions/sidebar-brand.png"
+          },
+          {
+            "id": "card-1-photo",
+            "verdict": "drift",
+            "score": {
+              "overall": 0.6334,
+              "structure": 0.5233,
+              "color": 0.7706,
+              "colorIntersection": 0.6219,
+              "paletteMatch": 0.8506,
+              "detail": 0.6026,
+              "detailRaw": 0.7484,
+              "detailAdded": 0.2917,
+              "bands": 0.9429
+            },
+            "file": ".impeccable/review/diff/hero/regions/card-1-photo.png"
+          }
+        ],
+        "advisories": [
+          "(advisory, unchanged for 3+ attempts) text hero-badges: letter-spacing is tighter than the comp's (gap 0.064 vs 0.139 of the cap height); set letter-spacing to open it by about 1px",
+          "(advisory, unchanged for 3+ attempts) text hero-badges: the face renders 44% lighter than the comp's (ink density 0.50 vs 0.89); raise a weight step or use the ranked face"
+        ],
+        "regionVerdicts": {
+          "hero-desk-photo": "drift",
+          "hero-headline": "drift",
+          "hero-subhead": "drift",
+          "hero-cta-primary": "drift",
+          "hero-cta-secondary": "drift",
+          "hero-badges": "drift",
+          "sidebar-brand": "drift",
+          "sidebar-nav": "drift",
+          "enso-mark": "drift",
+          "sidebar-featured-photo": "match",
+          "sidebar-featured-meta": "drift",
+          "card-1-photo": "drift",
+          "card-1-meta": "drift",
+          "card-2-photo": "drift",
+          "card-2-meta": "drift",
+          "card-3-photo": "drift",
+          "card-3-meta": "drift",
+          "card-4-photo": "drift",
+          "card-4-meta": "drift"
+        },
+        "at": "2026-10-29T19:26:29.366Z"
+      },
+      "forced": null,
+      "readingsSeen": {
+        "text hero-badges: the face renders 49% lighter than the comp's (ink density 0.45 vs 0.89); raise a weight step or use the ranked face": 1,
+        "text hero-badges: the face renders 48% lighter than the comp's (ink density 0.46 vs 0.89); raise a weight step or use the ranked face": 4,
+        "text hero-badges: letter-spacing is tighter than the comp's (gap 0.064 vs 0.139 of the cap height); set letter-spacing to open it by about 1px": 4,
+        "text hero-badges: the face renders 44% lighter than the comp's (ink density 0.50 vs 0.89); raise a weight step or use the ranked face": 4
+      },
+      "records": 2,
+      "history": [
+        {
+          "at": "2026-10-29T19:20:28.930Z",
+          "score": 0.8096,
+          "worstIds": [
+            "enso-mark",
+            "hero-headline",
+            "hero-subhead"
+          ],
+          "regionVerdicts": {
+            "hero-desk-photo": "drift",
+            "hero-headline": "drift",
+            "hero-subhead": "drift",
+            "hero-cta-primary": "drift",
+            "hero-cta-secondary": "drift",
+            "hero-badges": "drift",
+            "sidebar-brand": "drift",
+            "sidebar-nav": "drift",
+            "enso-mark": "drift",
+            "sidebar-featured-photo": "drift",
+            "sidebar-featured-meta": "contradicted",
+            "card-1-photo": "drift",
+            "card-1-meta": "drift",
+            "card-2-photo": "drift",
+            "card-2-meta": "drift",
+            "card-3-photo": "drift",
+            "card-3-meta": "drift",
+            "card-4-photo": "drift",
+            "card-4-meta": "drift"
+          },
+          "artifactHash": "2802c947395f"
+        },
+        {
+          "at": "2026-10-29T19:21:34.657Z",
+          "score": 0.8059,
+          "worstIds": [
+            "enso-mark",
+            "hero-headline",
+            "hero-subhead"
+          ],
+          "regionVerdicts": {
+            "hero-desk-photo": "drift",
+            "hero-headline": "drift",
+            "hero-subhead": "drift",
+            "hero-cta-primary": "drift",
+            "hero-cta-secondary": "drift",
+            "hero-badges": "drift",
+            "sidebar-brand": "drift",
+            "sidebar-nav": "drift",
+            "enso-mark": "drift",
+            "sidebar-featured-photo": "drift",
+            "sidebar-featured-meta": "drift",
+            "card-1-photo": "drift",
+            "card-1-meta": "drift",
+            "card-2-photo": "drift",
+            "card-2-meta": "drift",
+            "card-3-photo": "drift",
+            "card-3-meta": "drift",
+            "card-4-photo": "drift",
+            "card-4-meta": "drift"
+          },
+          "artifactHash": "2802c947395f"
+        },
+        {
+          "at": "2026-10-29T19:22:39.985Z",
+          "score": 0.801,
+          "worstIds": [
+            "enso-mark",
+            "hero-headline",
+            "sidebar-brand"
+          ],
+          "regionVerdicts": {
+            "hero-desk-photo": "drift",
+            "hero-headline": "drift",
+            "hero-subhead": "drift",
+            "hero-cta-primary": "drift",
+            "hero-cta-secondary": "drift",
+            "hero-badges": "drift",
+            "sidebar-brand": "drift",
+            "sidebar-nav": "drift",
+            "enso-mark": "drift",
+            "sidebar-featured-photo": "drift",
+            "sidebar-featured-meta": "drift",
+            "card-1-photo": "drift",
+            "card-1-meta": "drift",
+            "card-2-photo": "drift",
+            "card-2-meta": "drift",
+            "card-3-photo": "drift",
+            "card-3-meta": "drift",
+            "card-4-photo": "drift",
+            "card-4-meta": "drift"
+          },
+          "artifactHash": "2802c947395f"
+        },
+        {
+          "at": "2026-10-29T19:24:11.308Z",
+          "score": 0.8168,
+          "worstIds": [
+            "hero-headline",
+            "sidebar-brand",
+            "sidebar-featured-meta"
+          ],
+          "regionVerdicts": {
+            "hero-desk-photo": "drift",
+            "hero-headline": "drift",
+            "hero-subhead": "drift",
+            "hero-cta-primary": "drift",
+            "hero-cta-secondary": "drift",
+            "hero-badges": "drift",
+            "sidebar-brand": "drift",
+            "sidebar-nav": "drift",
+            "enso-mark": "drift",
+            "sidebar-featured-photo": "drift",
+            "sidebar-featured-meta": "drift",
+            "card-1-photo": "drift",
+            "card-1-meta": "drift",
+            "card-2-photo": "drift",
+            "card-2-meta": "drift",
+            "card-3-photo": "drift",
+            "card-3-meta": "drift",
+            "card-4-photo": "drift",
+            "card-4-meta": "drift"
+          },
+          "artifactHash": "2802c947395f"
+        },
+        {
+          "at": "2026-10-29T19:25:20.996Z",
+          "score": 0.817,
+          "worstIds": [
+            "hero-headline",
+            "sidebar-brand",
+            "sidebar-featured-meta"
+          ],
+          "regionVerdicts": {
+            "hero-desk-photo": "drift",
+            "hero-headline": "drift",
+            "hero-subhead": "drift",
+            "hero-cta-primary": "drift",
+            "hero-cta-secondary": "drift",
+            "hero-badges": "drift",
+            "sidebar-brand": "drift",
+            "sidebar-nav": "drift",
+            "enso-mark": "drift",
+            "sidebar-featured-photo": "drift",
+            "sidebar-featured-meta": "drift",
+            "card-1-photo": "drift",
+            "card-1-meta": "drift",
+            "card-2-photo": "drift",
+            "card-2-meta": "drift",
+            "card-3-photo": "drift",
+            "card-3-meta": "drift",
+            "card-4-photo": "drift",
+            "card-4-meta": "drift"
+          },
+          "artifactHash": "2802c947395f"
+        },
+        {
+          "at": "2026-10-29T19:26:29.366Z",
+          "score": 0.8167,
+          "worstIds": [
+            "hero-headline",
+            "sidebar-brand",
+            "card-1-photo"
+          ],
+          "regionVerdicts": {
+            "hero-desk-photo": "drift",
+            "hero-headline": "drift",
+            "hero-subhead": "drift",
+            "hero-cta-primary": "drift",
+            "hero-cta-secondary": "drift",
+            "hero-badges": "drift",
+            "sidebar-brand": "drift",
+            "sidebar-nav": "drift",
+            "enso-mark": "drift",
+            "sidebar-featured-photo": "match",
+            "sidebar-featured-meta": "drift",
+            "card-1-photo": "drift",
+            "card-1-meta": "drift",
+            "card-2-photo": "drift",
+            "card-2-meta": "drift",
+            "card-3-photo": "drift",
+            "card-3-meta": "drift",
+            "card-4-photo": "drift",
+            "card-4-meta": "drift"
+          },
+          "artifactHash": "2802c947395f"
+        }
+      ]
+    },
+    "sections": {
+      "status": "closed",
+      "openedAt": "2026-10-29T19:26:29.367Z",
+      "closedAt": "2026-10-29T19:26:49.169Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-10-29T19:26:49.169Z"
+      },
+      "forced": null
+    },
+    "motion": {
+      "status": "closed",
+      "openedAt": "2026-10-29T19:26:49.169Z",
+      "closedAt": "2026-10-29T19:27:06.389Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-10-29T19:27:06.389Z"
+      },
+      "forced": null
+    },
+    "responsive": {
+      "status": "closed",
+      "openedAt": "2026-10-29T19:27:06.389Z",
+      "closedAt": "2026-10-29T19:28:17.339Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "desktop 80% (match)",
+        "score": 0.8043,
+        "sideBySide": "/Users/macbook/core forontend/shopboard/.impeccable/review/diff/desktop/side-by-side.png",
+        "at": "2026-10-29T19:28:17.339Z"
+      },
+      "forced": null
+    },
+    "review": {
+      "status": "closed",
+      "openedAt": "2026-10-29T19:28:17.339Z",
+      "closedAt": "2026-10-29T19:30:30.137Z",
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": {
+    "disposition": "ship",
+    "at": "2026-10-29T19:30:30.137Z",
+    "phaseAtFinish": "review"
+  },
+  "plates": {
+    "hero-desk-photo": {
+      "status": "ok",
+      "score": 0.8003,
+      "size": "1264x848"
+    },
+    "enso-mark": {
+      "status": "ok",
+      "score": 0.471,
+      "size": "1200x896"
+    },
+    "sidebar-featured-photo": {
+      "status": "ok",
+      "score": 0.7827,
+      "size": "1200x896"
+    },
+    "card-1-photo": {
+      "status": "ok",
+      "score": 0.5741,
+      "size": "1200x896"
+    },
+    "card-2-photo": {
+      "status": "ok",
+      "score": 0.4787,
+      "size": "1200x896"
+    },
+    "card-3-photo": {
+      "status": "ok",
+      "score": 0.4384,
+      "size": "1200x896"
+    },
+    "card-4-photo": {
+      "status": "ok",
+      "score": 0.4052,
+      "size": "1200x896"
+    }
+  }
+}

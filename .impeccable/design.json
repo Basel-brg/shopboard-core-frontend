@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "seedKey": "d3214009",
+  "direction": "paper-folds-pleats-deployable-akari-light-sculpture",
+  "creativeNorthStar": "The Akari Desk Atelier",
+  "tokens": {
+    "colors": {
+      "washi-ivory": "#f2eada",
+      "washi-cream": "#f6efe1",
+      "paper-ash": "#eae5d8",
+      "well-ash": "#e5dfd2",
+      "bamboo-tan": "#ccb693",
+      "bamboo-border": "#d4be9b",
+      "rib-shadow": "#c3b5a2",
+      "charcoal-ink": "#252522",
+      "charcoal-deep": "#12100f",
+      "muted-umeboshi": "#686358",
+      "vermilion-seal": "#c23828",
+      "bamboo-green": "#2e6f40"
+    }
+  }
+}
