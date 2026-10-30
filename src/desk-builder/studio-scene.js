@@ -18,10 +18,10 @@ export class DeskStudioScene {
     this.container = containerElement
     if (!this.container) return
 
-    // Scene setup with subtle fog
+    // Scene setup with soft clean studio atmosphere
     this.scene = new THREE.Scene()
-    this.scene.background = new THREE.Color(0x0e1015)
-    this.scene.fog = new THREE.FogExp2(0x0e1015, 0.04)
+    this.scene.background = new THREE.Color(0x1e212b)
+    this.scene.fog = new THREE.FogExp2(0x1e212b, 0.015)
 
     const width = this.container.clientWidth || 800
     const height = this.container.clientHeight || 600
@@ -30,14 +30,14 @@ export class DeskStudioScene {
     this.camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100)
     this.camera.position.set(0, 3.4, 4.6)
 
-    // Renderer
+    // Renderer with enhanced studio exposure
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
     this.renderer.setSize(width, height)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping
-    this.renderer.toneMappingExposure = 1.15
+    this.renderer.toneMappingExposure = 1.45
 
     this.container.appendChild(this.renderer.domElement)
 
@@ -50,7 +50,7 @@ export class DeskStudioScene {
     this.controls.maxDistance = 8.0
     this.controls.target.set(0, 1.25, 0)
 
-    // Lighting
+    // Lighting (Studio 3-Point Lighting + Hemisphere Fill)
     this.setupLighting()
 
     // Environment & Desk
@@ -62,32 +62,44 @@ export class DeskStudioScene {
   }
 
   setupLighting() {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.75)
-    this.scene.add(ambientLight)
+    // 1. Hemisphere Light (Soft Sky Light + Warm Ground Bounce) - Eliminates pitch-black shadows
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444855, 1.8)
+    this.scene.add(hemiLight)
 
-    const dirLight = new THREE.DirectionalLight(0xffeedd, 1.9)
-    dirLight.position.set(4, 7, 5)
-    dirLight.castShadow = true
-    dirLight.shadow.mapSize.width = 2048
-    dirLight.shadow.mapSize.height = 2048
-    dirLight.shadow.bias = -0.0005
-    this.scene.add(dirLight)
+    // 2. Main Key Light (Warm Front-Right Spotlight)
+    const keyLight = new THREE.DirectionalLight(0xfff5ea, 2.4)
+    keyLight.position.set(3.5, 6.5, 4.5)
+    keyLight.castShadow = true
+    keyLight.shadow.mapSize.width = 2048
+    keyLight.shadow.mapSize.height = 2048
+    keyLight.shadow.bias = -0.0005
+    this.scene.add(keyLight)
+
+    // 3. Fill Light (Cool Front-Left Soft Fill) - Brightens the left side of the desk & keyboard
+    const fillLight = new THREE.DirectionalLight(0xd5e5ff, 1.6)
+    fillLight.position.set(-4.5, 5.0, 4.0)
+    this.scene.add(fillLight)
+
+    // 4. Back / Rim Light (Highlights monitor bevels and PC glass edge)
+    const rimLight = new THREE.DirectionalLight(0xffffff, 1.3)
+    rimLight.position.set(0, 4.5, -3.5)
+    this.scene.add(rimLight)
   }
 
   setupRoomAndDesk() {
-    // Floor
+    // Floor (Warm Studio Slate)
     const floor = new THREE.Mesh(
       new THREE.PlaneGeometry(30, 30),
-      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.85 })
+      new THREE.MeshStandardMaterial({ color: 0x1c1f28, roughness: 0.75, metalness: 0.1 })
     )
     floor.rotation.x = -Math.PI / 2
     floor.receiveShadow = true
     this.scene.add(floor)
 
-    // Wall
+    // Wall (Clean Modern Studio Backing)
     const wall = new THREE.Mesh(
       new THREE.PlaneGeometry(30, 15),
-      new THREE.MeshStandardMaterial({ color: 0x1a1c23, roughness: 0.9 })
+      new THREE.MeshStandardMaterial({ color: 0x242834, roughness: 0.85 })
     )
     wall.position.set(0, 7.5, -3)
     wall.receiveShadow = true
@@ -97,9 +109,13 @@ export class DeskStudioScene {
     const deskGroup = new THREE.Group()
     this.scene.add(deskGroup)
 
-    // Desk Top (Walnut wood, 3.2m x 1.6m)
+    // Desk Top (Warm Natural Walnut / Oak Wood)
     const deskGeo = new THREE.BoxGeometry(3.2, 0.08, 1.6)
-    const deskMat = new THREE.MeshStandardMaterial({ color: 0x3d2516, roughness: 0.35, metalness: 0.1 })
+    const deskMat = new THREE.MeshStandardMaterial({
+      color: 0x66412b,
+      roughness: 0.28,
+      metalness: 0.04
+    })
     this.deskTopMesh = new THREE.Mesh(deskGeo, deskMat)
     this.deskTopMesh.position.set(0, 1.4, 0)
     this.deskTopMesh.castShadow = true

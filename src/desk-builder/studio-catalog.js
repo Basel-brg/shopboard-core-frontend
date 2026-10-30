@@ -161,10 +161,10 @@ function buildCurvedMonitor(group, transparent, alpha) {
   // Curved Display Panel
   const displayGeo = new THREE.PlaneGeometry(1.81, 0.61)
   const displayMat = new THREE.MeshStandardMaterial({
-    color: 0x112233,
-    emissive: 0x003366,
-    emissiveIntensity: 0.6,
-    roughness: 0.2,
+    color: 0x225599,
+    emissive: 0x1166cc,
+    emissiveIntensity: 1.2,
+    roughness: 0.1,
     transparent,
     opacity: alpha
   })
@@ -177,8 +177,8 @@ function buildCurvedMonitor(group, transparent, alpha) {
 function buildMechanicalKeyboard(group, transparent, alpha) {
   const kbGeo = new THREE.BoxGeometry(0.72, 0.035, 0.25)
   const kbMat = new THREE.MeshStandardMaterial({
-    color: 0x22242a,
-    roughness: 0.5,
+    color: 0x2e323b,
+    roughness: 0.4,
     transparent,
     opacity: alpha
   })
@@ -190,9 +190,9 @@ function buildMechanicalKeyboard(group, transparent, alpha) {
   // Keycaps with RGB backlight accent
   const keysGeo = new THREE.BoxGeometry(0.68, 0.018, 0.21)
   const keysMat = new THREE.MeshStandardMaterial({
-    color: 0x141519,
-    emissive: 0xff6600,
-    emissiveIntensity: 0.25,
+    color: 0x1e2026,
+    emissive: 0xff7b00,
+    emissiveIntensity: 0.65,
     transparent,
     opacity: alpha
   })
@@ -205,9 +205,9 @@ function buildMechanicalKeyboard(group, transparent, alpha) {
 function buildErgonomicMouse(group, transparent, alpha) {
   const mouseGeo = new THREE.BoxGeometry(0.12, 0.045, 0.18)
   const mouseMat = new THREE.MeshStandardMaterial({
-    color: 0x1c1e24,
-    roughness: 0.35,
-    metalness: 0.4,
+    color: 0x262a34,
+    roughness: 0.3,
+    metalness: 0.5,
     transparent,
     opacity: alpha
   })
@@ -221,8 +221,8 @@ function buildErgonomicMouse(group, transparent, alpha) {
 function buildDeskMat(group, transparent, alpha) {
   const matGeo = new THREE.BoxGeometry(1.8, 0.015, 0.8)
   const matMaterial = new THREE.MeshStandardMaterial({
-    color: 0x1c1d22,
-    roughness: 0.95,
+    color: 0x2e323d,
+    roughness: 0.85,
     transparent,
     opacity: alpha
   })
