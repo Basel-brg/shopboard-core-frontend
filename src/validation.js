@@ -36,9 +36,9 @@ export const VALIDATION_RULES = {
   priceRange: {
     test: (val) => {
       const num = Number(val)
-      return !Number.isNaN(num) && num >= 90 && num <= 600
+      return !Number.isNaN(num) && num >= 50 && num <= 6000
     },
-    message: 'نطاق السعر يجب أن يكون بين 90 و 600 ر.س'
+    message: 'نطاق السعر يجب أن يكون بين 50 و 6000 ر.س'
   }
 }
 

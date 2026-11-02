@@ -14,8 +14,8 @@ import {
 const state = {
   selectedCategory: 'الكل',
   searchQuery: '',
-  sortBy: 'featured',
-  maxPrice: 500,
+  sortBy: 'default',
+  maxPrice: 6000,
   isCartOpen: false
 }
 
@@ -264,23 +264,23 @@ app.innerHTML = `
       <form class="filters-row" id="filters-form" novalidate>
         <div class="form-field price-filter-field">
           <label for="price-range-input" class="filter-label">
-            الحد الأقصى للسعر: <strong id="price-range-output">500 ر.س</strong>
+            الحد الأقصى للسعر: <strong id="price-range-output">6000 ر.س</strong>
           </label>
           <input
             type="range"
             id="price-range-input"
             name="maxPrice"
-            min="95"
-            max="500"
-            step="5"
-            value="500"
+            min="50"
+            max="6000"
+            step="50"
+            value="6000"
           />
         </div>
 
         <div class="form-field sort-filter-field">
           <label for="sort-select" class="filter-label">ترتيب حسب:</label>
           <select id="sort-select" name="sort">
-            <option value="featured">الأكثر تميزاً</option>
+            <option value="default">الافتراضي (ترتيب الكتالوج)</option>
             <option value="price-asc">السعر: الأقل أولاً</option>
             <option value="price-desc">السعر: الأعلى أولاً</option>
             <option value="rating">الأعلى تقييماً</option>
@@ -314,6 +314,14 @@ app.innerHTML = `
       <div class="drawer-title-wrap">
         <h2 id="cart-drawer-title">حقيبة التسوق</h2>
         <span id="drawer-items-count" class="drawer-items-count">0 عناصر</span>
+        <button
+          type="button"
+          id="cart-clear-btn"
+          class="cart-clear-btn"
+          aria-label="تفريغ سلة المشتريات بالكامل"
+        >
+          تفريغ السلة
+        </button>
       </div>
       <button
         type="button"
@@ -748,6 +756,7 @@ const cartBackdrop = document.querySelector('#cart-backdrop')
 const cartBadge = document.querySelector('#cart-badge')
 const headerCartTotal = document.querySelector('#header-cart-total')
 const drawerItemsCount = document.querySelector('#drawer-items-count')
+const cartClearBtn = document.querySelector('#cart-clear-btn')
 const shippingBanner = document.querySelector('#shipping-banner')
 const shippingBannerText = document.querySelector('#shipping-banner-text')
 const shippingProgressFill = document.querySelector('#shipping-progress-fill')
@@ -857,8 +866,9 @@ function getFilteredProducts() {
     case 'rating':
       list.sort((a, b) => b.rating - a.rating)
       break
+    case 'default':
     default:
-      list.sort((a, b) => (b.tag ? 1 : 0) - (a.tag ? 1 : 0))
+      list.sort((a, b) => PRODUCTS.indexOf(a) - PRODUCTS.indexOf(b))
   }
 
   return list
@@ -882,10 +892,12 @@ function renderProducts() {
     document.querySelector('#reset-filters')?.addEventListener('click', () => {
       state.selectedCategory = 'الكل'
       state.searchQuery = ''
-      state.maxPrice = 500
+      state.sortBy = 'default'
+      state.maxPrice = 6000
       searchInput.value = ''
-      priceRangeInput.value = '500'
-      priceRangeOutput.textContent = '500 ر.س'
+      sortSelect.value = 'default'
+      priceRangeInput.value = '6000'
+      priceRangeOutput.textContent = '6000 ر.س'
       clearValidationErrors(searchForm)
       renderCategories()
       renderProducts()
@@ -1061,6 +1073,9 @@ function updateCartUI(cartState) {
   cartBadge.textContent = cartState.count
   headerCartTotal.textContent = `${cartState.total} ر.س`
   drawerItemsCount.textContent = `${cartState.count} عناصر`
+  if (cartClearBtn) {
+    cartClearBtn.disabled = cartState.items.length === 0
+  }
 
   shippingProgressFill.style.width = `${cartState.shippingProgress}%`
   shippingProgressbar.setAttribute('aria-valuenow', String(cartState.shippingProgress))
@@ -1318,6 +1333,11 @@ function setupEvents() {
   cartToggleBtn.addEventListener('click', openCart)
   cartCloseBtn.addEventListener('click', closeCart)
   cartBackdrop.addEventListener('click', closeCart)
+  cartClearBtn?.addEventListener('click', () => {
+    if (cart.getState().items.length === 0) return
+    cart.clear()
+    showToast('تم إفراغ سلة التسوق بالكامل', 'info')
+  })
 
   // Coupon Form submission
   couponForm.addEventListener('submit', (e) => {
