@@ -1,28 +1,41 @@
 import './style.css'
-import { PRODUCTS, CATEGORIES } from './products.js'
-import { ICONS } from './icons.js'
-import { cart } from './cart.js'
-import { auth } from './auth.js'
+import { PRODUCTS } from './modules/products/products.api'
+import { filterProducts } from './modules/products/products.logic'
+import {
+  renderProducts as drawProducts,
+  renderCategories as drawCategories,
+  openQuickView as showQuickView
+} from './modules/products/products.ui'
+import type { SortOption } from './modules/products/products.types'
+import { cart } from './modules/cart/cart.state'
+import { renderCartUI } from './modules/cart/cart.ui'
+import type { CartState } from './modules/cart/cart.types'
+import { auth } from './modules/auth/auth.state'
+import type { User } from './modules/auth/auth.types'
+import { showToast } from './shared/ui/toast'
+import { ICONS } from './shared/ui/icons'
 import {
   validateField,
   validateForm,
   attachLiveValidation,
   clearValidationErrors
-} from './validation.js'
+} from './shared/validation'
 
 // Application State
-const state = {
+interface AppState {
+  selectedCategory: string;
+  searchQuery: string;
+  sortBy: SortOption;
+  maxPrice: number;
+  isCartOpen: boolean;
+}
+
+const state: AppState = {
   selectedCategory: 'الكل',
   searchQuery: '',
   sortBy: 'default',
   maxPrice: 6000,
   isCartOpen: false
-}
-
-// Helper to compute discount percentage
-function getDiscountPercent(price, originalPrice) {
-  if (!originalPrice || originalPrice <= price) return 0
-  return Math.round(((originalPrice - price) / originalPrice) * 100)
 }
 
 // Inline SVG icons for Comp-1 rail and badges
@@ -37,7 +50,7 @@ const COMP_SVGS = {
   badgeAward: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9.2 13.8L8 21l4-2.2L16 21l-1.2-7.2"/></svg>`
 }
 
-const app = document.querySelector('#app')
+const app = document.querySelector<HTMLDivElement>('#app')!
 app.innerHTML = `
   <!-- First Viewport: Comp-1 Atelier Rail & Stage (1376x768) -->
   <section id="hero-stage" class="comp-frame" aria-labelledby="hero-title">
@@ -738,319 +751,122 @@ app.innerHTML = `
   </footer>
 `
 
+// DOM Elements Helpers
+const $ = <T extends HTMLElement = HTMLElement>(sel: string): T => {
+  const el = document.querySelector<T>(sel)
+  if (!el) throw new Error(`Required element not found: ${sel}`)
+  return el
+}
+
+const $opt = <T extends HTMLElement = HTMLElement>(sel: string): T | null => {
+  return document.querySelector<T>(sel)
+}
+
 // DOM Elements
-const categoryNav = document.querySelector('#categories-nav')
-const productsGrid = document.querySelector('#products-grid')
-const productsCount = document.querySelector('#products-count')
-const searchForm = document.querySelector('#search-form')
-const searchInput = document.querySelector('#search-input')
-const sortSelect = document.querySelector('#sort-select')
-const priceRangeInput = document.querySelector('#price-range-input')
-const priceRangeOutput = document.querySelector('#price-range-output')
-const heroFilterElectronics = document.querySelector('#hero-filter-electronics')
+const categoryNav = $<HTMLElement>('#categories-nav')
+const productsGrid = $<HTMLElement>('#products-grid')
+const productsCount = $<HTMLElement>('#products-count')
+const searchForm = $<HTMLFormElement>('#search-form')
+const searchInput = $<HTMLInputElement>('#search-input')
+const sortSelect = $<HTMLSelectElement>('#sort-select')
+const priceRangeInput = $<HTMLInputElement>('#price-range-input')
+const priceRangeOutput = $<HTMLElement>('#price-range-output')
+const heroFilterElectronics = $opt<HTMLElement>('#hero-filter-electronics')
 
-const cartToggleBtn = document.querySelector('#cart-toggle-btn')
-const cartCloseBtn = document.querySelector('#cart-close-btn')
-const cartDrawer = document.querySelector('#cart-drawer')
-const cartBackdrop = document.querySelector('#cart-backdrop')
-const cartBadge = document.querySelector('#cart-badge')
-const headerCartTotal = document.querySelector('#header-cart-total')
-const drawerItemsCount = document.querySelector('#drawer-items-count')
-const cartClearBtn = document.querySelector('#cart-clear-btn')
-const shippingBanner = document.querySelector('#shipping-banner')
-const shippingBannerText = document.querySelector('#shipping-banner-text')
-const shippingProgressFill = document.querySelector('#shipping-progress-fill')
-const shippingProgressbar = document.querySelector('#shipping-progressbar')
-const cartEmptyView = document.querySelector('#cart-empty-view')
-const cartItemsList = document.querySelector('#cart-items-list')
+const cartToggleBtn = $<HTMLButtonElement>('#cart-toggle-btn')
+const cartCloseBtn = $<HTMLButtonElement>('#cart-close-btn')
+const cartDrawer = $<HTMLElement>('#cart-drawer')
+const cartBackdrop = $<HTMLElement>('#cart-backdrop')
+const cartBadge = $<HTMLElement>('#cart-badge')
+const headerCartTotal = $<HTMLElement>('#header-cart-total')
+const drawerItemsCount = $<HTMLElement>('#drawer-items-count')
+const cartClearBtn = $opt<HTMLButtonElement>('#cart-clear-btn')
+const shippingBanner = $<HTMLElement>('#shipping-banner')
+const shippingBannerText = $<HTMLElement>('#shipping-banner-text')
+const shippingProgressFill = $<HTMLElement>('#shipping-progress-fill')
+const shippingProgressbar = $<HTMLElement>('#shipping-progressbar')
+const cartEmptyView = $<HTMLElement>('#cart-empty-view')
+const cartItemsList = $<HTMLElement>('#cart-items-list')
 
-const couponForm = document.querySelector('#coupon-form')
-const couponInput = document.querySelector('#coupon-code')
-const appliedCouponTag = document.querySelector('#applied-coupon-tag')
-const appliedCouponText = document.querySelector('#applied-coupon-text')
-const removeCouponBtn = document.querySelector('#remove-coupon-btn')
+const couponForm = $<HTMLFormElement>('#coupon-form')
+const couponInput = $<HTMLInputElement>('#coupon-code')
+const appliedCouponTag = $<HTMLElement>('#applied-coupon-tag')
+const appliedCouponText = $<HTMLElement>('#applied-coupon-text')
+const removeCouponBtn = $<HTMLButtonElement>('#remove-coupon-btn')
 
-const checkoutForm = document.querySelector('#checkout-form')
-const customerNameInput = document.querySelector('#customer-name')
-const customerPhoneInput = document.querySelector('#customer-phone')
-const summarySubtotal = document.querySelector('#summary-subtotal')
-const summaryDiscountRow = document.querySelector('#summary-discount-row')
-const summaryDiscount = document.querySelector('#summary-discount')
-const summaryShipping = document.querySelector('#summary-shipping')
-const summaryTotal = document.querySelector('#summary-total')
+const checkoutForm = $<HTMLFormElement>('#checkout-form')
+const customerNameInput = $<HTMLInputElement>('#customer-name')
+const customerPhoneInput = $<HTMLInputElement>('#customer-phone')
+const summarySubtotal = $<HTMLElement>('#summary-subtotal')
+const summaryDiscountRow = $<HTMLElement>('#summary-discount-row')
+const summaryDiscount = $<HTMLElement>('#summary-discount')
+const summaryShipping = $<HTMLElement>('#summary-shipping')
+const summaryTotal = $<HTMLElement>('#summary-total')
 
-const productDialog = document.querySelector('#product-dialog')
-const productModalBody = document.querySelector('#product-modal-body')
+const productDialog = $<HTMLDialogElement>('#product-dialog')
+const productModalBody = $<HTMLElement>('#product-modal-body')
 
-const orderDialog = document.querySelector('#order-dialog')
-const dialogOrderMsg = document.querySelector('#dialog-order-msg')
-const dialogDetails = document.querySelector('#dialog-details')
-const dialogCloseBtn = document.querySelector('#dialog-close-btn')
-const toastContainer = document.querySelector('#toast-container')
-const newsletterForm = document.querySelector('#newsletter-form')
+const orderDialog = $<HTMLDialogElement>('#order-dialog')
+const dialogOrderMsg = $<HTMLElement>('#dialog-order-msg')
+const dialogDetails = $<HTMLElement>('#dialog-details')
+const dialogCloseBtn = $<HTMLButtonElement>('#dialog-close-btn')
+const newsletterForm = $<HTMLFormElement>('#newsletter-form')
 
 // Auth Elements
-const authToggleBtn = document.querySelector('#auth-toggle-btn')
-const authBtnLabel = document.querySelector('#auth-btn-label')
-const authDialog = document.querySelector('#auth-dialog')
-const authCloseBtn = document.querySelector('#auth-close-btn')
-const authModalTitle = document.querySelector('#auth-modal-title')
-const authAnonymousSection = document.querySelector('#auth-anonymous-section')
-const authAuthenticatedSection = document.querySelector('#auth-authenticated-section')
-const tabLogin = document.querySelector('#tab-login')
-const tabRegister = document.querySelector('#tab-register')
-const loginForm = document.querySelector('#login-form')
-const registerForm = document.querySelector('#register-form')
-const authUserName = document.querySelector('#auth-user-name')
-const authUserEmail = document.querySelector('#auth-user-email')
-const authLogoutBtn = document.querySelector('#auth-logout-btn')
-
-// Toast Notification
-function showToast(message) {
-  const toast = document.createElement('div')
-  toast.className = 'toast'
-  toast.innerHTML = `<span class="toast-check">${ICONS.check}</span> <span>${message}</span>`
-  toastContainer.appendChild(toast)
-
-  setTimeout(() => {
-    toast.classList.add('toast-fade')
-    setTimeout(() => toast.remove(), 300)
-  }, 2800)
-}
+const authToggleBtn = $<HTMLButtonElement>('#auth-toggle-btn')
+const authBtnLabel = $<HTMLElement>('#auth-btn-label')
+const authDialog = $<HTMLDialogElement>('#auth-dialog')
+const authCloseBtn = $<HTMLButtonElement>('#auth-close-btn')
+const authModalTitle = $<HTMLElement>('#auth-modal-title')
+const authAnonymousSection = $<HTMLElement>('#auth-anonymous-section')
+const authAuthenticatedSection = $<HTMLElement>('#auth-authenticated-section')
+const tabLogin = $<HTMLButtonElement>('#tab-login')
+const tabRegister = $<HTMLButtonElement>('#tab-register')
+const loginForm = $<HTMLFormElement>('#login-form')
+const registerForm = $<HTMLFormElement>('#register-form')
+const authUserName = $<HTMLElement>('#auth-user-name')
+const authUserEmail = $<HTMLElement>('#auth-user-email')
+const authLogoutBtn = $<HTMLButtonElement>('#auth-logout-btn')
 
 // Render Categories with product counts
-function renderCategories() {
-  categoryNav.innerHTML = CATEGORIES.map((cat) => {
-    const count =
-      cat === 'الكل'
-        ? PRODUCTS.length
-        : PRODUCTS.filter((item) => item.category === cat).length
-    const isActive = state.selectedCategory === cat
-
-    return `
-      <button
-        type="button"
-        class="category-btn ${isActive ? 'is-active' : ''}"
-        data-category="${cat}"
-        aria-pressed="${isActive}"
-      >
-        <span>${cat}</span>
-        <span class="category-count">${count}</span>
-      </button>
-    `
-  }).join('')
-}
-
-// Filter and Sort Products
-function getFilteredProducts() {
-  const list = PRODUCTS.filter((item) => {
-    const matchesCategory =
-      state.selectedCategory === 'الكل' || item.category === state.selectedCategory
-    const matchesPrice = item.price <= state.maxPrice
-    const query = state.searchQuery.trim().toLowerCase()
-    const matchesSearch =
-      !query ||
-      item.name.toLowerCase().includes(query) ||
-      item.description.toLowerCase().includes(query) ||
-      item.category.toLowerCase().includes(query)
-    return matchesCategory && matchesPrice && matchesSearch
-  })
-
-  switch (state.sortBy) {
-    case 'price-asc':
-      list.sort((a, b) => a.price - b.price)
-      break
-    case 'price-desc':
-      list.sort((a, b) => b.price - a.price)
-      break
-    case 'rating':
-      list.sort((a, b) => b.rating - a.rating)
-      break
-    case 'default':
-    default:
-      list.sort((a, b) => PRODUCTS.indexOf(a) - PRODUCTS.indexOf(b))
-  }
-
-  return list
+function renderCategories(): void {
+  drawCategories(categoryNav, state.selectedCategory)
 }
 
 // Render Product Catalog
-function renderProducts() {
-  const products = getFilteredProducts()
-  productsCount.textContent = `عرض ${products.length} من أصل ${PRODUCTS.length} قطع مكتبية`
+function renderProducts(): void {
+  const products = filterProducts(PRODUCTS, {
+    category: state.selectedCategory,
+    searchQuery: state.searchQuery,
+    maxPrice: state.maxPrice,
+    sortBy: state.sortBy
+  })
 
-  if (products.length === 0) {
-    productsGrid.innerHTML = `
-      <div class="empty-results">
-        <h3>لا توجد منتجات مطابقة لمعايير البحث</h3>
-        <p>جرّب توسيع الحد الأقصى للسعر أو اختيار تصنيف آخر.</p>
-        <button type="button" class="btn btn-primary" id="reset-filters">
-          إعادة ضبط جميع الفلاتر
-        </button>
-      </div>
-    `
-    document.querySelector('#reset-filters')?.addEventListener('click', () => {
-      state.selectedCategory = 'الكل'
-      state.searchQuery = ''
-      state.sortBy = 'default'
-      state.maxPrice = 6000
-      searchInput.value = ''
-      sortSelect.value = 'default'
-      priceRangeInput.value = '6000'
-      priceRangeOutput.textContent = '6000 ر.س'
-      clearValidationErrors(searchForm)
-      renderCategories()
-      renderProducts()
-    })
-    return
-  }
-
-  productsGrid.innerHTML = products.map((item) => {
-    const discountPct = getDiscountPercent(item.price, item.originalPrice)
-
-    return `
-      <article class="product-card" data-id="${item.id}">
-        <figure class="product-media">
-          <img
-            src="${item.image}"
-            alt="${item.name}"
-            class="product-img"
-            loading="lazy"
-            width="400"
-            height="300"
-          />
-
-          <div class="product-badges">
-            ${item.tag ? `<span class="badge-editorial">${item.tag}</span>` : ''}
-            ${discountPct > 0 ? `<span class="badge-discount">خصم ${discountPct}%</span>` : ''}
-          </div>
-
-          <button
-            type="button"
-            class="quick-view-trigger"
-            data-quick-id="${item.id}"
-            aria-label="معاينة تفاصيل ${item.name}"
-          >
-            ${ICONS.eye}
-            <span>معاينة</span>
-          </button>
-        </figure>
-
-        <div class="product-body">
-          <div class="product-meta-row">
-            <span class="product-cat">${item.category}</span>
-            <div class="product-rating" aria-label="التقييم ${item.rating} من 5">
-              <span class="star-svg">${ICONS.star}</span>
-              <strong>${item.rating}</strong>
-              <span class="rating-count">(${item.reviewsCount})</span>
-            </div>
-          </div>
-
-          <h3 class="product-name">${item.name}</h3>
-          <p class="product-desc">${item.description}</p>
-
-          <ul class="product-specs" aria-label="أبرز المواصفات">
-            ${item.specs.slice(0, 2).map((spec) => `<li>${spec}</li>`).join('')}
-          </ul>
-
-          <div class="product-price-row">
-            <div class="product-price">
-              <div class="price-current">
-                <span class="amount">${item.price}</span>
-                <span class="currency">ر.س</span>
-              </div>
-              ${item.originalPrice ? `<s class="original-price">${item.originalPrice} ر.س</s>` : ''}
-            </div>
-
-            <button
-              type="button"
-              class="btn btn-add-cart"
-              data-add-id="${item.id}"
-              aria-label="أضف ${item.name} إلى السلة"
-            >
-              ${ICONS.plus}
-              <span>أضف للسلة</span>
-            </button>
-          </div>
-        </div>
-      </article>
-    `
-  }).join('')
+  drawProducts(productsGrid, productsCount, products, () => {
+    state.selectedCategory = 'الكل'
+    state.searchQuery = ''
+    state.sortBy = 'default'
+    state.maxPrice = 6000
+    searchInput.value = ''
+    sortSelect.value = 'default'
+    priceRangeInput.value = '6000'
+    priceRangeOutput.textContent = '6000 ر.س'
+    clearValidationErrors(searchForm)
+    renderCategories()
+    renderProducts()
+  })
 }
 
 // Open Quick View Modal for a Product
-function openQuickView(productId) {
-  const item = PRODUCTS.find((p) => p.id === productId)
-  if (!item) return
-
-  const discountPct = getDiscountPercent(item.price, item.originalPrice)
-
-  productModalBody.innerHTML = `
-    <header class="dialog-header">
-      <div>
-        <h2 id="quick-view-title">${item.name}</h2>
-        <p class="catalog-subtitle">${item.category} • كود المنتج ${item.sku}</p>
-      </div>
-      <button type="button" class="icon-close-btn" id="quick-view-close" aria-label="إغلاق المعاينة">
-        ${ICONS.close}
-      </button>
-    </header>
-
-    <div class="quick-view-grid">
-      <figure class="quick-view-figure">
-        <img
-          src="${item.image}"
-          alt="${item.name}"
-          class="quick-view-img"
-          width="500"
-          height="420"
-        />
-      </figure>
-
-      <div class="quick-view-details">
-        <p class="quick-view-desc">${item.description}</p>
-
-        <div class="quick-view-specs-box">
-          <h3>المواصفات التقنية والضمان:</h3>
-          <ul class="product-specs">
-            ${item.specs.map((s) => `<li>${s}</li>`).join('')}
-            <li>${item.warranty}</li>
-          </ul>
-        </div>
-
-        <div class="product-price-row">
-          <div class="product-price">
-            <div class="price-current">
-              <span class="amount">${item.price}</span>
-              <span class="currency">ر.س</span>
-            </div>
-            ${item.originalPrice ? `<s class="original-price">${item.originalPrice} ر.س</s>` : ''}
-            ${discountPct > 0 ? `<span class="badge-discount">توفير ${discountPct}%</span>` : ''}
-          </div>
-
-          <button type="button" class="btn btn-primary btn-lg" id="quick-view-add-btn">
-            أضف إلى حقيبة التسوق
-          </button>
-        </div>
-      </div>
-    </div>
-  `
-
-  productModalBody.querySelector('#quick-view-close')?.addEventListener('click', () => {
-    productDialog.close()
-  })
-
-  productModalBody.querySelector('#quick-view-add-btn')?.addEventListener('click', () => {
+function openQuickView(productId: number): void {
+  showQuickView(productId, productModalBody, productDialog, (item) => {
     cart.addItem(item)
     showToast(`تمت إضافة "${item.name}" إلى السلة`)
-    productDialog.close()
   })
-
-  productDialog.showModal()
 }
 
 // Cart Drawer open/close
-function openCart() {
+function openCart(): void {
   state.isCartOpen = true
   cartDrawer.classList.add('is-open')
   cartDrawer.setAttribute('aria-hidden', 'false')
@@ -1059,7 +875,7 @@ function openCart() {
   document.body.classList.add('drawer-locked')
 }
 
-function closeCart() {
+function closeCart(): void {
   state.isCartOpen = false
   cartDrawer.classList.remove('is-open')
   cartDrawer.setAttribute('aria-hidden', 'true')
@@ -1069,110 +885,35 @@ function closeCart() {
 }
 
 // Render Cart UI from CartManager state
-function updateCartUI(cartState) {
-  cartBadge.textContent = cartState.count
-  headerCartTotal.textContent = `${cartState.total} ر.س`
-  drawerItemsCount.textContent = `${cartState.count} عناصر`
-  if (cartClearBtn) {
-    cartClearBtn.disabled = cartState.items.length === 0
-  }
-
-  shippingProgressFill.style.width = `${cartState.shippingProgress}%`
-  shippingProgressbar.setAttribute('aria-valuenow', String(cartState.shippingProgress))
-  if (cartState.remainingForFreeShipping === 0 && cartState.count > 0) {
-    shippingBannerText.innerHTML = `<strong>تهانينا!</strong> طلبك مؤهل للحصول على شحن مجاني بالكامل.`
-    shippingBanner.classList.add('is-unlocked')
-  } else {
-    shippingBannerText.innerHTML = `أضف <strong>${cartState.remainingForFreeShipping} ر.س</strong> إضافية للحصول على <strong>شحن مجاني</strong>`
-    shippingBanner.classList.remove('is-unlocked')
-  }
-
-  if (cartState.appliedCoupon) {
-    appliedCouponTag.hidden = false
-    appliedCouponText.textContent = `تم تفعيل الكود ${cartState.appliedCoupon.code} (${cartState.appliedCoupon.label})`
-  } else {
-    appliedCouponTag.hidden = true
-  }
-
-  if (cartState.items.length === 0) {
-    cartEmptyView.style.display = 'flex'
-    cartItemsList.style.display = 'none'
-    couponForm.style.display = 'none'
-    checkoutForm.style.display = 'none'
-  } else {
-    cartEmptyView.style.display = 'none'
-    cartItemsList.style.display = 'flex'
-    couponForm.style.display = 'flex'
-    checkoutForm.style.display = 'flex'
-
-    cartItemsList.innerHTML = cartState.items.map((item) => {
-      const productImg =
-        item.image || PRODUCTS.find((p) => p.id === item.id)?.image || ''
-      return `
-        <li class="cart-item" data-id="${item.id}">
-          <div class="cart-item-thumb">
-            <img
-              src="${productImg}"
-              alt="${item.name}"
-              class="cart-item-img"
-              loading="lazy"
-              width="68"
-              height="68"
-            />
-          </div>
-          <div class="item-details">
-            <h4 class="item-name">${item.name}</h4>
-            <span class="item-price">${item.price} ر.س × ${item.quantity} = <strong>${item.price * item.quantity} ر.س</strong></span>
-            <div class="quantity-controls" aria-label="التحكم بالكمية">
-              <button
-                type="button"
-                class="qty-btn"
-                data-action="decrease"
-                data-id="${item.id}"
-                aria-label="إنقاص الكمية لمنتج ${item.name}"
-              >
-                −
-              </button>
-              <span class="qty-display" aria-label="الكمية الحالية">${item.quantity}</span>
-              <button
-                type="button"
-                class="qty-btn"
-                data-action="increase"
-                data-id="${item.id}"
-                aria-label="زيادة الكمية لمنتج ${item.name}"
-              >
-                +
-              </button>
-              <button
-                type="button"
-                class="item-delete-btn"
-                data-action="delete"
-                data-id="${item.id}"
-                aria-label="حذف منتج ${item.name} من السلة"
-              >
-                ${ICONS.trash}
-                <span>حذف</span>
-              </button>
-            </div>
-          </div>
-        </li>
-      `
-    }).join('')
-
-    summarySubtotal.textContent = `${cartState.subtotal} ر.س`
-    if (cartState.discountAmount > 0) {
-      summaryDiscountRow.hidden = false
-      summaryDiscount.textContent = `-${cartState.discountAmount} ر.س`
-    } else {
-      summaryDiscountRow.hidden = true
-    }
-    summaryShipping.textContent = cartState.shipping === 0 ? 'مجاني' : `${cartState.shipping} ر.س`
-    summaryTotal.textContent = `${cartState.total} ر.س`
-  }
+function updateCartUI(cartState: CartState): void {
+  renderCartUI(
+    {
+      badge: cartBadge,
+      headerTotal: headerCartTotal,
+      drawerCount: drawerItemsCount,
+      clearBtn: cartClearBtn,
+      progressFill: shippingProgressFill,
+      progressBar: shippingProgressbar,
+      bannerText: shippingBannerText,
+      banner: shippingBanner,
+      couponTag: appliedCouponTag,
+      couponText: appliedCouponText,
+      emptyView: cartEmptyView,
+      itemsList: cartItemsList,
+      subtotal: summarySubtotal,
+      discountRow: summaryDiscountRow,
+      discount: summaryDiscount,
+      shipping: summaryShipping,
+      total: summaryTotal,
+      couponForm: couponForm,
+      checkoutForm: checkoutForm
+    },
+    cartState
+  )
 }
 
 // Auth UI Updates
-function updateAuthUI(user) {
+function updateAuthUI(user: User | null): void {
   if (user) {
     authBtnLabel.textContent = user.name || 'حسابي'
     authToggleBtn.classList.add('is-authenticated')
@@ -1200,7 +941,7 @@ function updateAuthUI(user) {
 }
 
 // Switch between login and register tabs
-function switchAuthTab(target) {
+function switchAuthTab(target: 'login' | 'register'): void {
   clearValidationErrors(loginForm)
   clearValidationErrors(registerForm)
 
@@ -1224,7 +965,7 @@ function switchAuthTab(target) {
 }
 
 // Events Setup
-function setupEvents() {
+function setupEvents(): void {
   // Setup Live Realtime Validations for all inputs
   attachLiveValidation('search-input', 'search', { validateOnBlur: false })
   attachLiveValidation('price-range-input', 'priceRange', { validateOnBlur: false })
@@ -1241,21 +982,24 @@ function setupEvents() {
   attachLiveValidation('newsletter-email', 'email')
 
   // Category clicks
-  categoryNav.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-category]')
-    if (!btn) return
+  categoryNav.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement | null
+    const btn = target?.closest<HTMLButtonElement>('[data-category]')
+    if (!btn || !btn.dataset.category) return
     state.selectedCategory = btn.dataset.category
     renderCategories()
     renderProducts()
   })
 
   // Hero desk setup shortcut
-  heroFilterElectronics.addEventListener('click', () => {
-    state.selectedCategory = 'تنظيم المكتب'
-    renderCategories()
-    renderProducts()
-    document.querySelector('#products-section')?.scrollIntoView({ behavior: 'smooth' })
-  })
+  if (heroFilterElectronics) {
+    heroFilterElectronics.addEventListener('click', () => {
+      state.selectedCategory = 'تنظيم المكتب'
+      renderCategories()
+      renderProducts()
+      document.querySelector('#products-section')?.scrollIntoView({ behavior: 'smooth' })
+    })
+  }
 
   // Sidebar featured item quick view / add
   document.querySelector('[data-spotlight-add]')?.addEventListener('click', () => {
@@ -1263,7 +1007,7 @@ function setupEvents() {
   })
 
   // First-viewport 4 catalog card Add-to-Cart buttons
-  document.querySelectorAll('[data-hero-add]').forEach((btn) => {
+  document.querySelectorAll<HTMLButtonElement>('[data-hero-add]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const id = Number(btn.dataset.heroAdd)
       const product = PRODUCTS.find((p) => p.id === id)
@@ -1275,52 +1019,57 @@ function setupEvents() {
   })
 
   // Footer category links
-  document.querySelectorAll('[data-footer-cat]').forEach((link) => {
+  document.querySelectorAll<HTMLElement>('[data-footer-cat]').forEach((link) => {
     link.addEventListener('click', () => {
-      state.selectedCategory = link.dataset.footerCat
-      renderCategories()
-      renderProducts()
+      if (link.dataset.footerCat) {
+        state.selectedCategory = link.dataset.footerCat
+        renderCategories()
+        renderProducts()
+      }
     })
   })
 
   // Search form
-  searchForm.addEventListener('submit', (e) => {
+  searchForm.addEventListener('submit', (e: SubmitEvent) => {
     e.preventDefault()
     if (!validateField(searchInput, 'search')) return
     state.searchQuery = searchInput.value
     renderProducts()
   })
 
-  searchInput.addEventListener('input', (e) => {
+  searchInput.addEventListener('input', (e: Event) => {
     if (!validateField(searchInput, 'search')) return
-    state.searchQuery = e.target.value
+    state.searchQuery = (e.target as HTMLInputElement).value
     renderProducts()
   })
 
   // Price range slider
-  priceRangeInput.addEventListener('input', (e) => {
+  priceRangeInput.addEventListener('input', (e: Event) => {
     if (!validateField(priceRangeInput, 'priceRange')) return
-    state.maxPrice = Number(e.target.value)
+    state.maxPrice = Number((e.target as HTMLInputElement).value)
     priceRangeOutput.textContent = `${state.maxPrice} ر.س`
     renderProducts()
   })
 
   // Sort change
-  sortSelect.addEventListener('change', (e) => {
-    state.sortBy = e.target.value
+  sortSelect.addEventListener('change', (e: Event) => {
+    state.sortBy = (e.target as HTMLSelectElement).value as SortOption
     renderProducts()
   })
 
   // Product Grid Actions (Add to Cart & Quick View)
-  productsGrid.addEventListener('click', (e) => {
-    const quickBtn = e.target.closest('[data-quick-id]')
-    if (quickBtn) {
+  productsGrid.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement | null
+    if (!target) return
+
+    const quickBtn = target.closest<HTMLElement>('[data-quick-id]')
+    if (quickBtn && quickBtn.dataset.quickId) {
       openQuickView(Number(quickBtn.dataset.quickId))
       return
     }
 
-    const addBtn = e.target.closest('[data-add-id]')
-    if (!addBtn) return
+    const addBtn = target.closest<HTMLElement>('[data-add-id]')
+    if (!addBtn || !addBtn.dataset.addId) return
     const id = Number(addBtn.dataset.addId)
     const product = PRODUCTS.find((p) => p.id === id)
     if (product) {
@@ -1340,7 +1089,7 @@ function setupEvents() {
   })
 
   // Coupon Form submission
-  couponForm.addEventListener('submit', (e) => {
+  couponForm.addEventListener('submit', (e: SubmitEvent) => {
     e.preventDefault()
     const isValid = validateForm(couponForm, [{ inputId: 'coupon-code', ruleKey: 'coupon' }])
     if (!isValid) return
@@ -1359,10 +1108,10 @@ function setupEvents() {
   })
 
   // 3D Desk Builder open
-  const deskBuilderBtn = document.querySelector('#btn-open-desk-builder')
+  const deskBuilderBtn = document.querySelector<HTMLButtonElement>('#btn-open-desk-builder')
   if (deskBuilderBtn) {
     deskBuilderBtn.addEventListener('click', async () => {
-      const { initDeskBuilder } = await import('./desk-builder/index.js')
+      const { initDeskBuilder } = await import('./desk-builder/index')
       initDeskBuilder()
     })
   }
@@ -1380,7 +1129,7 @@ function setupEvents() {
   tabRegister.addEventListener('click', () => switchAuthTab('register'))
 
   // Login submission
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', (e: SubmitEvent) => {
     e.preventDefault()
     const isValid = validateForm(loginForm, [
       { inputId: 'login-email', ruleKey: 'email' },
@@ -1388,9 +1137,9 @@ function setupEvents() {
     ])
     if (!isValid) return
 
-    const email = document.querySelector('#login-email').value
-    const password = document.querySelector('#login-password').value
-    const remember = document.querySelector('#login-remember').checked
+    const email = document.querySelector<HTMLInputElement>('#login-email')?.value || ''
+    const password = document.querySelector<HTMLInputElement>('#login-password')?.value || ''
+    const remember = document.querySelector<HTMLInputElement>('#login-remember')?.checked || false
 
     const user = auth.login(email, password, remember)
     showToast(`أهلاً بك مجدداً يا ${user.name}`)
@@ -1400,7 +1149,7 @@ function setupEvents() {
   })
 
   // Register submission
-  registerForm.addEventListener('submit', (e) => {
+  registerForm.addEventListener('submit', (e: SubmitEvent) => {
     e.preventDefault()
     const isValid = validateForm(registerForm, [
       { inputId: 'register-name', ruleKey: 'name' },
@@ -1410,9 +1159,9 @@ function setupEvents() {
     ])
     if (!isValid) return
 
-    const name = document.querySelector('#register-name').value
-    const email = document.querySelector('#register-email').value
-    const phone = document.querySelector('#register-phone').value
+    const name = document.querySelector<HTMLInputElement>('#register-name')?.value || ''
+    const email = document.querySelector<HTMLInputElement>('#register-email')?.value || ''
+    const phone = document.querySelector<HTMLInputElement>('#register-phone')?.value || ''
 
     const user = auth.register({ name, email, phone })
     showToast(`تم إنشاء حسابك بنجاح، مرحباً ${user.name}`)
@@ -1429,9 +1178,10 @@ function setupEvents() {
   })
 
   // Cart quantity & delete actions
-  cartItemsList.addEventListener('click', (e) => {
-    const btn = e.target.closest('button[data-action]')
-    if (!btn) return
+  cartItemsList.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement | null
+    const btn = target?.closest<HTMLButtonElement>('button[data-action]')
+    if (!btn || !btn.dataset.id || !btn.dataset.action) return
     const id = Number(btn.dataset.id)
     const action = btn.dataset.action
 
@@ -1446,7 +1196,7 @@ function setupEvents() {
   })
 
   // Checkout submission
-  checkoutForm.addEventListener('submit', (e) => {
+  checkoutForm.addEventListener('submit', (e: SubmitEvent) => {
     e.preventDefault()
     const cartState = cart.getState()
     if (cartState.items.length === 0) return
@@ -1459,12 +1209,12 @@ function setupEvents() {
     if (!isValid) return
 
     const formData = new FormData(checkoutForm)
-    const name = formData.get('name')
-    const phone = formData.get('phone')
-    const city = formData.get('city')
-    const payment = formData.get('payment')
+    const name = (formData.get('name') as string) || ''
+    const phone = (formData.get('phone') as string) || ''
+    const city = (formData.get('city') as string) || ''
+    const payment = (formData.get('payment') as string) || 'card'
 
-    const paymentLabels = {
+    const paymentLabels: Record<string, string> = {
       cod: 'الدفع عند الاستلام',
       card: 'بطاقة مدى / ائتمانية',
       applepay: 'Apple Pay'
@@ -1491,7 +1241,7 @@ function setupEvents() {
   })
 
   // Newsletter form
-  newsletterForm.addEventListener('submit', (e) => {
+  newsletterForm.addEventListener('submit', (e: SubmitEvent) => {
     e.preventDefault()
     const isValid = validateForm(newsletterForm, [
       { inputId: 'newsletter-email', ruleKey: 'email' }
@@ -1504,8 +1254,8 @@ function setupEvents() {
   })
 
   // Close dialogs when clicking backdrop
-  ;[productDialog, authDialog, orderDialog].forEach((dialogEl) => {
-    dialogEl.addEventListener('click', (e) => {
+  ;([productDialog, authDialog, orderDialog] as HTMLDialogElement[]).forEach((dialogEl) => {
+    dialogEl.addEventListener('click', (e: MouseEvent) => {
       if (e.target === dialogEl) {
         dialogEl.close()
       }
@@ -1513,7 +1263,7 @@ function setupEvents() {
   })
 
   // Escape key closes drawer
-  window.addEventListener('keydown', (e) => {
+  window.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape' && state.isCartOpen) {
       closeCart()
     }

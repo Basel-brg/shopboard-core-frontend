@@ -1,4 +1,6 @@
-export const PRODUCTS = [
+import type { Product, CategoryType } from './products.types';
+
+export const PRODUCTS: readonly Product[] = [
   {
     id: 1,
     sku: 'SB-KEY-01',
@@ -164,9 +166,9 @@ export const PRODUCTS = [
     image: '/assets/products/curved-monitor.jpg',
     tag: 'سيت أب احترافي'
   }
-]
+];
 
-export const CATEGORIES = [
+export const CATEGORIES: readonly CategoryType[] = [
   'الكل',
   'أجهزة ألعاب',
   'شاشات العرض',
@@ -175,4 +177,8 @@ export const CATEGORIES = [
   'إضاءة المكتب',
   'ملحقات التحكم',
   'تنظيم المكتب'
-]
+];
+
+export async function fetchProducts(): Promise<readonly Product[]> {
+  return PRODUCTS;
+}
