@@ -1,15 +1,25 @@
 import './style.css'
-import { PRODUCTS, CATEGORIES } from './products'
-import { ICONS } from './icons'
-import { cart } from './cart'
-import { auth } from './auth'
-import type { CartState, User, SortOption, Product } from './types'
+import { PRODUCTS } from './modules/products/products.api'
+import { filterProducts } from './modules/products/products.logic'
+import {
+  renderProducts as drawProducts,
+  renderCategories as drawCategories,
+  openQuickView as showQuickView
+} from './modules/products/products.ui'
+import type { SortOption } from './modules/products/products.types'
+import { cart } from './modules/cart/cart.state'
+import { renderCartUI } from './modules/cart/cart.ui'
+import type { CartState } from './modules/cart/cart.types'
+import { auth } from './modules/auth/auth.state'
+import type { User } from './modules/auth/auth.types'
+import { showToast } from './shared/ui/toast'
+import { ICONS } from './shared/ui/icons'
 import {
   validateField,
   validateForm,
   attachLiveValidation,
   clearValidationErrors
-} from './validation'
+} from './shared/validation'
 
 // Application State
 interface AppState {
@@ -26,12 +36,6 @@ const state: AppState = {
   sortBy: 'default',
   maxPrice: 6000,
   isCartOpen: false
-}
-
-// Helper to compute discount percentage
-function getDiscountPercent(price: number, originalPrice?: number): number {
-  if (!originalPrice || originalPrice <= price) return 0
-  return Math.round(((originalPrice - price) / originalPrice) * 100)
 }
 
 // Inline SVG icons for Comp-1 rail and badges
@@ -806,7 +810,6 @@ const orderDialog = $<HTMLDialogElement>('#order-dialog')
 const dialogOrderMsg = $<HTMLElement>('#dialog-order-msg')
 const dialogDetails = $<HTMLElement>('#dialog-details')
 const dialogCloseBtn = $<HTMLButtonElement>('#dialog-close-btn')
-const toastContainer = $<HTMLElement>('#toast-container')
 const newsletterForm = $<HTMLFormElement>('#newsletter-form')
 
 // Auth Elements
@@ -825,249 +828,45 @@ const authUserName = $<HTMLElement>('#auth-user-name')
 const authUserEmail = $<HTMLElement>('#auth-user-email')
 const authLogoutBtn = $<HTMLButtonElement>('#auth-logout-btn')
 
-// Toast Notification
-function showToast(message: string, _type: string = 'success'): void {
-  const toast = document.createElement('div')
-  toast.className = 'toast'
-  toast.innerHTML = `<span class="toast-check">${ICONS.check}</span> <span>${message}</span>`
-  toastContainer.appendChild(toast)
-
-  setTimeout(() => {
-    toast.classList.add('toast-fade')
-    setTimeout(() => toast.remove(), 300)
-  }, 2800)
-}
-
 // Render Categories with product counts
-function renderCategories() {
-  categoryNav.innerHTML = CATEGORIES.map((cat) => {
-    const count =
-      cat === 'الكل'
-        ? PRODUCTS.length
-        : PRODUCTS.filter((item) => item.category === cat).length
-    const isActive = state.selectedCategory === cat
-
-    return `
-      <button
-        type="button"
-        class="category-btn ${isActive ? 'is-active' : ''}"
-        data-category="${cat}"
-        aria-pressed="${isActive}"
-      >
-        <span>${cat}</span>
-        <span class="category-count">${count}</span>
-      </button>
-    `
-  }).join('')
-}
-
-// Filter and Sort Products
-function getFilteredProducts(): Product[] {
-  const list = PRODUCTS.filter((item) => {
-    const matchesCategory =
-      state.selectedCategory === 'الكل' || item.category === state.selectedCategory
-    const matchesPrice = item.price <= state.maxPrice
-    const query = state.searchQuery.trim().toLowerCase()
-    const matchesSearch =
-      !query ||
-      item.name.toLowerCase().includes(query) ||
-      item.description.toLowerCase().includes(query) ||
-      item.category.toLowerCase().includes(query)
-    return matchesCategory && matchesPrice && matchesSearch
-  })
-
-  switch (state.sortBy) {
-    case 'price-asc':
-      return list.sort((a, b) => a.price - b.price)
-    case 'price-desc':
-      return list.sort((a, b) => b.price - a.price)
-    case 'rating':
-      return list.sort((a, b) => b.rating - a.rating)
-    case 'default':
-    default:
-      return list.sort((a, b) => PRODUCTS.indexOf(a) - PRODUCTS.indexOf(b))
-  }
+function renderCategories(): void {
+  drawCategories(categoryNav, state.selectedCategory)
 }
 
 // Render Product Catalog
 function renderProducts(): void {
-  const products = getFilteredProducts()
-  productsCount.textContent = `عرض ${products.length} من أصل ${PRODUCTS.length} قطع مكتبية`
+  const products = filterProducts(PRODUCTS, {
+    category: state.selectedCategory,
+    searchQuery: state.searchQuery,
+    maxPrice: state.maxPrice,
+    sortBy: state.sortBy
+  })
 
-  if (products.length === 0) {
-    productsGrid.innerHTML = `
-      <div class="empty-results">
-        <h3>لا توجد منتجات مطابقة لمعايير البحث</h3>
-        <p>جرّب توسيع الحد الأقصى للسعر أو اختيار تصنيف آخر.</p>
-        <button type="button" class="btn btn-primary" id="reset-filters">
-          إعادة ضبط جميع الفلاتر
-        </button>
-      </div>
-    `
-    document.querySelector('#reset-filters')?.addEventListener('click', () => {
-      state.selectedCategory = 'الكل'
-      state.searchQuery = ''
-      state.sortBy = 'default'
-      state.maxPrice = 6000
-      searchInput.value = ''
-      sortSelect.value = 'default'
-      priceRangeInput.value = '6000'
-      priceRangeOutput.textContent = '6000 ر.س'
-      clearValidationErrors(searchForm)
-      renderCategories()
-      renderProducts()
-    })
-    return
-  }
-
-  productsGrid.innerHTML = products.map((item) => {
-    const discountPct = getDiscountPercent(item.price, item.originalPrice)
-    const specsList = item.specs ? item.specs.slice(0, 2).map((spec: string) => `<li>${spec}</li>`).join('') : ''
-
-    return `
-      <article class="product-card" data-id="${item.id}">
-        <figure class="product-media">
-          <img
-            src="${item.image}"
-            alt="${item.name}"
-            class="product-img"
-            loading="lazy"
-            width="400"
-            height="300"
-          />
-
-          <div class="product-badges">
-            ${item.tag ? `<span class="badge-editorial">${item.tag}</span>` : ''}
-            ${discountPct > 0 ? `<span class="badge-discount">خصم ${discountPct}%</span>` : ''}
-          </div>
-
-          <button
-            type="button"
-            class="quick-view-trigger"
-            data-quick-id="${item.id}"
-            aria-label="معاينة تفاصيل ${item.name}"
-          >
-            ${ICONS.eye}
-            <span>معاينة</span>
-          </button>
-        </figure>
-
-        <div class="product-body">
-          <div class="product-meta-row">
-            <span class="product-cat">${item.category}</span>
-            <div class="product-rating" aria-label="التقييم ${item.rating} من 5">
-              <span class="star-svg">${ICONS.star}</span>
-              <strong>${item.rating}</strong>
-              <span class="rating-count">(${item.reviewsCount})</span>
-            </div>
-          </div>
-
-          <h3 class="product-name">${item.name}</h3>
-          <p class="product-desc">${item.description}</p>
-
-          <ul class="product-specs" aria-label="أبرز المواصفات">
-            ${specsList}
-          </ul>
-
-          <div class="product-price-row">
-            <div class="product-price">
-              <div class="price-current">
-                <span class="amount">${item.price}</span>
-                <span class="currency">ر.س</span>
-              </div>
-              ${item.originalPrice ? `<s class="original-price">${item.originalPrice} ر.س</s>` : ''}
-            </div>
-
-            <button
-              type="button"
-              class="btn btn-add-cart"
-              data-add-id="${item.id}"
-              aria-label="أضف ${item.name} إلى السلة"
-            >
-              ${ICONS.plus}
-              <span>أضف للسلة</span>
-            </button>
-          </div>
-        </div>
-      </article>
-    `
-  }).join('')
+  drawProducts(productsGrid, productsCount, products, () => {
+    state.selectedCategory = 'الكل'
+    state.searchQuery = ''
+    state.sortBy = 'default'
+    state.maxPrice = 6000
+    searchInput.value = ''
+    sortSelect.value = 'default'
+    priceRangeInput.value = '6000'
+    priceRangeOutput.textContent = '6000 ر.س'
+    clearValidationErrors(searchForm)
+    renderCategories()
+    renderProducts()
+  })
 }
 
 // Open Quick View Modal for a Product
 function openQuickView(productId: number): void {
-  const item = PRODUCTS.find((p) => p.id === productId)
-  if (!item) return
-
-  const discountPct = getDiscountPercent(item.price, item.originalPrice)
-  const fullSpecs = item.specs ? item.specs.map((s: string) => `<li>${s}</li>`).join('') : ''
-
-  productModalBody.innerHTML = `
-    <header class="dialog-header">
-      <div>
-        <h2 id="quick-view-title">${item.name}</h2>
-        <p class="catalog-subtitle">${item.category} • كود المنتج ${item.sku}</p>
-      </div>
-      <button type="button" class="icon-close-btn" id="quick-view-close" aria-label="إغلاق المعاينة">
-        ${ICONS.close}
-      </button>
-    </header>
-
-    <div class="quick-view-grid">
-      <figure class="quick-view-figure">
-        <img
-          src="${item.image}"
-          alt="${item.name}"
-          class="quick-view-img"
-          width="500"
-          height="420"
-        />
-      </figure>
-
-      <div class="quick-view-details">
-        <p class="quick-view-desc">${item.description}</p>
-
-        <div class="quick-view-specs-box">
-          <h3>المواصفات التقنية والضمان:</h3>
-          <ul class="product-specs">
-            ${fullSpecs}
-            ${item.warranty ? `<li>${item.warranty}</li>` : ''}
-          </ul>
-        </div>
-
-        <div class="product-price-row">
-          <div class="product-price">
-            <div class="price-current">
-              <span class="amount">${item.price}</span>
-              <span class="currency">ر.س</span>
-            </div>
-            ${item.originalPrice ? `<s class="original-price">${item.originalPrice} ر.س</s>` : ''}
-            ${discountPct > 0 ? `<span class="badge-discount">توفير ${discountPct}%</span>` : ''}
-          </div>
-
-          <button type="button" class="btn btn-primary btn-lg" id="quick-view-add-btn">
-            أضف إلى حقيبة التسوق
-          </button>
-        </div>
-      </div>
-    </div>
-  `
-
-  productModalBody.querySelector('#quick-view-close')?.addEventListener('click', () => {
-    productDialog.close()
-  })
-
-  productModalBody.querySelector('#quick-view-add-btn')?.addEventListener('click', () => {
+  showQuickView(productId, productModalBody, productDialog, (item) => {
     cart.addItem(item)
     showToast(`تمت إضافة "${item.name}" إلى السلة`)
-    productDialog.close()
   })
-
-  productDialog.showModal()
 }
 
 // Cart Drawer open/close
-function openCart() {
+function openCart(): void {
   state.isCartOpen = true
   cartDrawer.classList.add('is-open')
   cartDrawer.setAttribute('aria-hidden', 'false')
@@ -1076,7 +875,7 @@ function openCart() {
   document.body.classList.add('drawer-locked')
 }
 
-function closeCart() {
+function closeCart(): void {
   state.isCartOpen = false
   cartDrawer.classList.remove('is-open')
   cartDrawer.setAttribute('aria-hidden', 'true')
@@ -1087,105 +886,30 @@ function closeCart() {
 
 // Render Cart UI from CartManager state
 function updateCartUI(cartState: CartState): void {
-  cartBadge.textContent = String(cartState.count)
-  headerCartTotal.textContent = `${cartState.total} ر.س`
-  drawerItemsCount.textContent = `${cartState.count} عناصر`
-  if (cartClearBtn) {
-    cartClearBtn.disabled = cartState.items.length === 0
-  }
-
-  shippingProgressFill.style.width = `${cartState.shippingProgress}%`
-  shippingProgressbar.setAttribute('aria-valuenow', String(cartState.shippingProgress))
-  if (cartState.remainingForFreeShipping === 0 && cartState.count > 0) {
-    shippingBannerText.innerHTML = `<strong>تهانينا!</strong> طلبك مؤهل للحصول على شحن مجاني بالكامل.`
-    shippingBanner.classList.add('is-unlocked')
-  } else {
-    shippingBannerText.innerHTML = `أضف <strong>${cartState.remainingForFreeShipping} ر.س</strong> إضافية للحصول على <strong>شحن مجاني</strong>`
-    shippingBanner.classList.remove('is-unlocked')
-  }
-
-  if (cartState.appliedCoupon) {
-    appliedCouponTag.hidden = false
-    appliedCouponText.textContent = `تم تفعيل الكود ${cartState.appliedCoupon.code} (${cartState.appliedCoupon.label})`
-  } else {
-    appliedCouponTag.hidden = true
-  }
-
-  if (cartState.items.length === 0) {
-    cartEmptyView.style.display = 'flex'
-    cartItemsList.style.display = 'none'
-    couponForm.style.display = 'none'
-    checkoutForm.style.display = 'none'
-  } else {
-    cartEmptyView.style.display = 'none'
-    cartItemsList.style.display = 'flex'
-    couponForm.style.display = 'flex'
-    checkoutForm.style.display = 'flex'
-
-    cartItemsList.innerHTML = cartState.items.map((item) => {
-      const productImg =
-        item.image || PRODUCTS.find((p) => p.id === item.id)?.image || ''
-      return `
-        <li class="cart-item" data-id="${item.id}">
-          <div class="cart-item-thumb">
-            <img
-              src="${productImg}"
-              alt="${item.name}"
-              class="cart-item-img"
-              loading="lazy"
-              width="68"
-              height="68"
-            />
-          </div>
-          <div class="item-details">
-            <h4 class="item-name">${item.name}</h4>
-            <span class="item-price">${item.price} ر.س × ${item.quantity} = <strong>${item.price * item.quantity} ر.س</strong></span>
-            <div class="quantity-controls" aria-label="التحكم بالكمية">
-              <button
-                type="button"
-                class="qty-btn"
-                data-action="decrease"
-                data-id="${item.id}"
-                aria-label="إنقاص الكمية لمنتج ${item.name}"
-              >
-                −
-              </button>
-              <span class="qty-display" aria-label="الكمية الحالية">${item.quantity}</span>
-              <button
-                type="button"
-                class="qty-btn"
-                data-action="increase"
-                data-id="${item.id}"
-                aria-label="زيادة الكمية لمنتج ${item.name}"
-              >
-                +
-              </button>
-              <button
-                type="button"
-                class="item-delete-btn"
-                data-action="delete"
-                data-id="${item.id}"
-                aria-label="حذف منتج ${item.name} من السلة"
-              >
-                ${ICONS.trash}
-                <span>حذف</span>
-              </button>
-            </div>
-          </div>
-        </li>
-      `
-    }).join('')
-
-    summarySubtotal.textContent = `${cartState.subtotal} ر.س`
-    if (cartState.discountAmount > 0) {
-      summaryDiscountRow.hidden = false
-      summaryDiscount.textContent = `-${cartState.discountAmount} ر.س`
-    } else {
-      summaryDiscountRow.hidden = true
-    }
-    summaryShipping.textContent = cartState.shipping === 0 ? 'مجاني' : `${cartState.shipping} ر.س`
-    summaryTotal.textContent = `${cartState.total} ر.س`
-  }
+  renderCartUI(
+    {
+      badge: cartBadge,
+      headerTotal: headerCartTotal,
+      drawerCount: drawerItemsCount,
+      clearBtn: cartClearBtn,
+      progressFill: shippingProgressFill,
+      progressBar: shippingProgressbar,
+      bannerText: shippingBannerText,
+      banner: shippingBanner,
+      couponTag: appliedCouponTag,
+      couponText: appliedCouponText,
+      emptyView: cartEmptyView,
+      itemsList: cartItemsList,
+      subtotal: summarySubtotal,
+      discountRow: summaryDiscountRow,
+      discount: summaryDiscount,
+      shipping: summaryShipping,
+      total: summaryTotal,
+      couponForm: couponForm,
+      checkoutForm: checkoutForm
+    },
+    cartState
+  )
 }
 
 // Auth UI Updates

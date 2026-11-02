@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import { DeskStudioScene } from './studio-scene';
 import { DeskStudioInteraction } from './studio-interaction';
 import { calculateSetupTotal, addSetupToCart } from './studio-cart';
-import { PRODUCTS } from '../products';
-import { cart } from '../cart';
+import { PRODUCTS } from '../modules/products/products.api';
+import { cart } from '../modules/cart/cart.state';
 
 let studioScene: DeskStudioScene | null = null;
 let studioInteraction: DeskStudioInteraction | null = null;

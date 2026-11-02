@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { PRODUCTS } from '../products';
+import { PRODUCTS } from '../modules/products/products.api';
 import type { DeskSceneItemUserData } from '../types';
 
 export function create3DProduct(productId: number | string, isPreview: boolean = false): THREE.Group | null {
