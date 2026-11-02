@@ -1,4 +1,6 @@
-export const PRODUCTS = [
+import type { Product, CategoryType, SortOption } from './types';
+
+export const PRODUCTS: readonly Product[] = [
   {
     id: 1,
     sku: 'SB-KEY-01',
@@ -164,9 +166,9 @@ export const PRODUCTS = [
     image: '/assets/products/curved-monitor.jpg',
     tag: 'سيت أب احترافي'
   }
-]
+];
 
-export const CATEGORIES = [
+export const CATEGORIES: readonly CategoryType[] = [
   'الكل',
   'أجهزة ألعاب',
   'شاشات العرض',
@@ -175,4 +177,23 @@ export const CATEGORIES = [
   'إضاءة المكتب',
   'ملحقات التحكم',
   'تنظيم المكتب'
-]
+];
+
+export function sortProducts(items: Product[], sortBy: SortOption): Product[] {
+  const shallow = [...items];
+  switch (sortBy) {
+    case 'price-asc':
+      return shallow.sort((a, b) => a.price - b.price);
+    case 'price-desc':
+      return shallow.sort((a, b) => b.price - a.price);
+    case 'rating':
+      return shallow.sort((a, b) => b.rating - a.rating);
+    case 'default':
+    default:
+      return shallow.sort((a, b) => {
+        const indexA = PRODUCTS.findIndex((p) => p.id === a.id);
+        const indexB = PRODUCTS.findIndex((p) => p.id === b.id);
+        return indexA - indexB;
+      });
+  }
+}

@@ -1,6 +1,6 @@
 // Crisp SVG UI Icons & Custom Studio Product Artwork
 
-export const ICONS = {
+export const ICONS: Record<string, string> = {
   logo: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h16l-1.5 14.5a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8L6 7Z"/><path d="M10 7V5a4 4 0 0 1 8 0v2"/><path d="M10 13a4 4 0 0 0 8 0"/></svg>`,
   search: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`,
   bag: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
@@ -15,9 +15,9 @@ export const ICONS = {
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>`,
   eye: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`,
   trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>`
-}
+};
 
-export const PRODUCT_ARTWORK = {
+export const PRODUCT_ARTWORK: Record<string, string> = {
   headphones: `
     <svg viewBox="0 0 160 140" fill="none" aria-hidden="true" class="product-svg">
       <circle cx="80" cy="72" r="48" fill="currentColor" opacity="0.08"/>
@@ -105,4 +105,4 @@ export const PRODUCT_ARTWORK = {
       <rect x="56" y="100" width="48" height="10" rx="5" fill="currentColor"/>
     </svg>
   `
-}
+};
