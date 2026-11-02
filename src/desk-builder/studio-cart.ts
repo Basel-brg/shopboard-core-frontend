@@ -1,7 +1,7 @@
 import type * as THREE from 'three';
 import { PRODUCTS } from '../modules/products/products.api';
 import type { CartManager } from '../modules/cart/cart.state';
-import type { DeskSceneItemUserData } from '../types';
+import type { DeskSceneItemUserData } from './types';
 
 export interface SetupCartResult {
   totalItems: number;

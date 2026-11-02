@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { PRODUCTS, CATEGORIES } from '../src/products.js'
+import { PRODUCTS, CATEGORIES } from '../src/modules/products/products.api'
 
 test('PRODUCTS contains gaming PC case and curved monitor', () => {
   const pc = PRODUCTS.find(p => p.sku === 'SB-PC-09')

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { PRODUCTS } from '../modules/products/products.api';
-import type { DeskSceneItemUserData } from '../types';
+import type { DeskSceneItemUserData } from './types';
 
 export function create3DProduct(productId: number | string, isPreview: boolean = false): THREE.Group | null {
   const product = PRODUCTS.find((p) => p.id === Number(productId));
